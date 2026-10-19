@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ConsolAppForSpejder/ConsolAppForSpejder.csproj" />
+  <Project Path="DeLyserrodSpejdere/DeLyserrodSpejdere.csproj" />
+  <Project Path="SpejderWeb/SpejderWeb.csproj" />
+</Solution>
