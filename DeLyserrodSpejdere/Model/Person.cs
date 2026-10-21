@@ -7,7 +7,7 @@ namespace DeLyserrodSpejdere.Model
 {
     public class Person
     {
-        public bool IsSupervisor { get; set; }
+        public int _isSupervisor;
         public int PersonId { get; set; }
 
         public string _firstName;
@@ -24,6 +24,22 @@ namespace DeLyserrodSpejdere.Model
         public string _userName;
         public string _userPassword;
         public string _userPassworConfrim;
+
+        public int IsSupervisor
+        {
+            get { return _isSupervisor; }
+            set
+            {
+                if (value == 2007)
+                {
+                    _isSupervisor = 1;
+                }
+                else
+                {
+                    _isSupervisor = 0;
+                }
+            }
+        }
 
         public string FirstName
         {

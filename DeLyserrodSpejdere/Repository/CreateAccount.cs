@@ -1,4 +1,5 @@
-﻿using DeLyserrodSpejdere.Model;
+﻿using DeLyserrodSpejdere.Interface;
+using DeLyserrodSpejdere.Model;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace DeLyserrodSpejdere.Repository
 {
-    public class CreateAccount
+    public class CreateAccount : ICreateAccount
     {
         public void Create(Person account)
         {

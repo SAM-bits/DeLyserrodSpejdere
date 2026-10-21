@@ -1,3 +1,6 @@
+using DeLyserrodSpejdere.Interface;
+using DeLyserrodSpejdere.Repository;
+
 namespace SpejderWeb
 {
     public class Program
@@ -8,6 +11,7 @@ namespace SpejderWeb
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddScoped<ICreateAccount, CreateAccount>();
 
             var app = builder.Build();
 

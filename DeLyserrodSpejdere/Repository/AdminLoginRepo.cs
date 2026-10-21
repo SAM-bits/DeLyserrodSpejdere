@@ -1,10 +1,11 @@
-﻿using DeLyserrodSpejdere.Model;
+﻿using DeLyserrodSpejdere.Interface;
+using DeLyserrodSpejdere.Model;
 using Microsoft.Data.SqlClient;
 using System.Security.Cryptography.X509Certificates;
 
 namespace DeLyserrodSpejdere.Repository
 {
-    public class AdminLoginRepo
+    public class AdminLoginRepo : IAdminLoginRepo
     {
         public void CreateActivities(Activities act)
         {
@@ -31,6 +32,35 @@ namespace DeLyserrodSpejdere.Repository
             {
                 Console.WriteLine("Aktiviteten er oprettet. : ");
             }
+            DBConnector.DisconnectToDb();
+        }
+
+        public void UpdateActivitie(Activities upAc)
+        {
+            DBConnector.ConnectToDB();
+            string sqlComm = @"Update Activities
+                           SET NameOfActivites =@NameOfActivites ,DetailsAboutActivities=@DetailsAboutActivities, StartDate=@StartDate,StartTime=@StartTime,EndTime=@EndTime,LimitOfMembers=@LimitOfMembers,AgeRestrictions=@AgeRestrictions , SpecialCharacter =@SpecialCharacter,Address=@Address,CityId=(Select CityId from City where CityName=@CityName And PostCode=@PostCode)
+                            Where ActivitiesId = @ActivitiesId";
+
+            SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
+            cmd.Parameters.AddWithValue(@"ActivitiesId", upAc.ActivitieId);
+            cmd.Parameters.AddWithValue(@"NameOfActivites", upAc.NameOfActivites);
+            cmd.Parameters.AddWithValue(@"DetailsAboutActivities", upAc.DetailsAboutActivites);
+            cmd.Parameters.AddWithValue(@"StartDate", upAc.StartDate);
+            cmd.Parameters.AddWithValue(@"StartTime", upAc.StartTime);
+            cmd.Parameters.AddWithValue(@"EndTime", upAc.EndTime);
+            cmd.Parameters.AddWithValue(@"LimitOfMembers", upAc.LimitOfMemebers);
+            cmd.Parameters.AddWithValue(@"AgeRestrictions", upAc.AgeRestrictions);
+            cmd.Parameters.AddWithValue(@"SpecialCharacter", upAc.SpecialCharacter);
+            cmd.Parameters.AddWithValue(@"Address", upAc.Address);
+            cmd.Parameters.AddWithValue(@"CityName", upAc.CityName);
+            cmd.Parameters.AddWithValue(@"PostCode", upAc.PostCode);
+
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                Console.WriteLine($"Updatering af Aktivitet med aktivetes id ({upAc.ActivitieId}) er updateret.");
+            }
+
             DBConnector.DisconnectToDb();
         }
 

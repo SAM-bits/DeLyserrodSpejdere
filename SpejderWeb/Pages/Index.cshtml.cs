@@ -7,7 +7,6 @@ namespace SpejderWeb.Pages
     {
         public void OnGet()
         {
-
         }
     }
 }

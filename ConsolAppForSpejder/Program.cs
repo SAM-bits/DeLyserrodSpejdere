@@ -21,18 +21,19 @@ namespace ConsolAppForSpejder
             //aktivitet.CityName = "Roskilde";
             //aktivitet.PostCode = 4000;
 
-            //Activities aktivitet1 = new();
-            //aktivitet1.NameOfActivites = " SkoveTur ";
-            //aktivitet1.DetailsAboutActivites = " Vi skal på skove tur og plukke blåbære";
-            //aktivitet1.StartDate = new DateOnly(2026, 11, 25);
-            //aktivitet1.StartTime = new TimeOnly(09, 00, 00);
-            //aktivitet1.EndTime = new TimeOnly(18, 00, 00);
-            //aktivitet1.LimitOfMemebers = 25;
-            //aktivitet1.AgeRestrictions = 5;
-            //aktivitet1.SpecialCharacter = SpecialCharacter.IngenTegn;
-            //aktivitet1.Address = "SpejderVej 13";
-            //aktivitet1.CityName = "Roskilde";
-            //aktivitet1.PostCode = 4000;
+            Activities aktivitet1 = new();
+            aktivitet1.ActivitieId = 1;
+            aktivitet1.NameOfActivites = " SkoveTur ";
+            aktivitet1.DetailsAboutActivites = " Vi skal på skove tur og plukke blåbære";
+            aktivitet1.StartDate = new DateOnly(2026, 11, 25);
+            aktivitet1.StartTime = new TimeOnly(09, 00, 00);
+            aktivitet1.EndTime = new TimeOnly(18, 00, 00);
+            aktivitet1.LimitOfMemebers = 5;
+            aktivitet1.AgeRestrictions = 10;
+            aktivitet1.SpecialCharacter = SpecialCharacter.IngenTegn;
+            aktivitet1.Address = "SpejderVej 13";
+            aktivitet1.CityName = "Roskilde";
+            aktivitet1.PostCode = 4000;
 
             //AdminLoginRepo activitiesCreater = new();
             //activitiesCreater.CreateActivities(aktivitet);
@@ -92,14 +93,29 @@ namespace ConsolAppForSpejder
 
             AdminLoginRepo test = new();
 
-            test.ShowRegisteredInActivities(1);
+            //test.ShowRegisteredInActivities(1);
 
-            foreach (var item in test.ShowRegisteredInActivities(2))
-            {
-                Console.WriteLine(item);
-            }
+            //foreach (var item in test.ShowRegisteredInActivities(2))
+            //{
+            //    Console.WriteLine(item);
+            //}
 
-            test.RemoveUserFromActivitieByPersonId(1);
+            //test.RemoveUserFromActivitieByPersonId(1);
+
+            //test.UpdateActivitie(aktivitet1);
+
+            UserLoginRepo user = new();
+
+            //user.ShowActivities();
+            //foreach (var item in user.ShowActivities())
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            //user.JoinActivitiesByPersonId(2, 1);
+            //user.JoinActivitiesByPersonId(2, 2);
+            //user.JoinActivitiesByPersonId(2, 3);
+            user.LeaveActivities(2);
         }
     }
 }

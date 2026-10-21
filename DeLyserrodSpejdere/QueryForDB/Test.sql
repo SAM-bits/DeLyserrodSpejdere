@@ -58,9 +58,9 @@ select * from Person
 select * from SpejderLogin
 select * from Activities
 select * from City
-select * from ActivitiesRegister
+select * from ActivitiesRegister 
 
-
+Select  NameOfActivites as AktivtetsNavn , DetailsAboutActivities as AktivitetsDetaljer , StartDate as OpstartsDato , StartTime as StartTidspunkt,EndTime as SlutTid , AgeRestrictions as AlderGrænse , SpecialCharacter as SpejderTegn , Address as Adresse from Activities
 
 Select ActivitiesRegister.*, Person.FirstName , Person.LastName , Activities.NameOfActivites,Activities.StartDate   From ActivitiesRegister
 inner join Person on ActivitiesRegister.PersonId = Person.Personid
@@ -74,3 +74,7 @@ inner join City on City.CityId = Activities.CityId where ActivitiesId = 2;
 
 
 -- 
+
+Update Activities 
+                           SET NameOfActivites =@NameOfActivites ,DetailsAboutActivities=@DetailsAboutActivities, StartDate=@StartDate,StartTime=@StartTime,EndTime=@EndTime,LimitOfMembers=@LimitOfMembers,AgeRestrictions=@AgeRestrictions , SpecialCharacter =@SpecialCharacter,Address=@Adress,CityId=(Select CityId from City where CityName=@CityName And PostCode=@PostCode)
+                            Where ActivitiesId = 2;

@@ -1,0 +1,124 @@
+﻿@page
+@model SpejderWeb.Pages.CreateAccountModel
+@{
+}
+
+<div style="text-align: center; margin-top: 50px;">
+	<h2>Opret Spejder konto</h2>
+
+	<form method="post">
+		<br />
+
+		<div>
+			<label>Indtast lederkoden, hvis du er leder. </label><br />
+			<input asp-for="Person.IsSupervisor" />
+		</div>
+
+		<br />
+
+		<div>
+			<label>Fornavn</label><br />
+			<input asp-for="Person.FirstName" />
+		</div>
+
+		<br />
+
+		<div>
+			<label>Efternavn</label><br />
+			<input asp-for="Person.LastName" />
+		</div>
+
+		<br />
+
+		<div>
+			<label>Email</label><br />
+			<input asp-for="Person.Email" />
+		</div>
+
+		<br />
+
+		<div>
+			<label>Telefonnummer</label><br />
+			<input asp-for="Person.PhoneNumber" />
+		</div>
+
+		<br />
+
+		<div>
+			<label>Alder</label><br />
+			<input asp-for="Person.Age" />
+		</div>
+
+		<br />
+
+		<div>
+			<label>Adresse</label><br />
+			<input asp-for="Person.Adress" />
+		</div>
+
+		<br />
+
+		<div>
+			<label>Bynavn</label><br />
+			<input asp-for="Person.CityName" />
+		</div>
+
+		<br />
+
+		<div>
+			<label>Post nummer</label><br />
+			<input asp-for="Person.PostCode" />
+		</div>
+
+		<br />
+
+		<div>
+			<label>Bruger navn </label><br />
+
+			<select asp-for="Person.SpeacialCharacters">
+				<option value="">-- Vælg et spejdertegn --</option>
+				<option value="IngenTegn">Ingen tegn</option>
+				<option value="Lejrmaerke">Lejrmærke</option>
+				<option value="Balmaerke">Bålmærke</option>
+				<option value="Orienteringsmaerke">Orienteringsmærke</option>
+				<option value="Overnatningsmaerke">Overnatningsmærke</option>
+				<option value="Naturmaerke">Naturmærke</option>
+				<option value="Forstehjaelpsmaerke">Førstehjælpsmærke</option>
+				<option value="Knobmaerke">Knobmærke</option>
+				<option value="Madlavningsmaerke">Madlavningsmærke</option>
+				<option value="Vandremaerke">Vandremærke</option>
+				<option value="Pionermaerke">Pionermærke</option>
+			</select>
+		</div>
+
+		<br />
+
+		<div>
+			<label>Bruger navn </label><br />
+			<input asp-for="Person.UserName" />
+		</div>
+
+		<br />
+
+		<div>
+			<label>Kodeordet </label><br />
+			<input asp-for="Person.UserPassword" />
+		</div>
+
+		<br />
+
+		<div>
+			<label>Gentag kodeordet </label><br />
+			<input asp-for="Person.UserPasswordConfirm" />
+		</div>
+
+		<br />
+
+		<button type="submit">Opret konto</button>
+
+		@if (!string.IsNullOrEmpty(Model.Message))
+		{
+			<p>@Model.Message</p>
+		}
+	</form>
+</div>
