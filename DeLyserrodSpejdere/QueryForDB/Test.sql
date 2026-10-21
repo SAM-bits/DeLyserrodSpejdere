@@ -51,6 +51,9 @@ values (1)
 
 DELETE FROM Person; DBCC CHECKIDENT ('Person', RESEED, 0);	
 DELETE FROM SpejderLogin; DBCC CHECKIDENT ('SpejderLogin', RESEED, 0);	
+DELETE FROM Activities; DBCC CHECKIDENT ('Activities', RESEED, 0);	
 
 select * from Person
 select * from SpejderLogin
+select * from Activities
+select * from City

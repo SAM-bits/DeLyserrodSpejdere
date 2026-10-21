@@ -15,7 +15,9 @@ namespace DeLyserrodSpejdere.Model
         public int LimitOfMemebers { get; set; }
         public int _ageRestictions;
         public SpecialCharacter _specialCharacter;
-        public string _city;
+        public string _address;
+        public string _cityName;
+        public int _postCode;
 
         public string NameOfActivites
         {
@@ -77,19 +79,46 @@ namespace DeLyserrodSpejdere.Model
             }
         }
 
-        public string City
+        public string Address
         {
-            get { return _city; }
+            get { return _address; }
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException("Må ikke være tom , og adressen skal være roskilde. prøv igen !");
                 }
-                _city = value;
+                _address = value;
             }
         }
 
+        public string CityName
+        {
+            get { return _cityName; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value) || value.Trim().Length < 2)
+                {
+                    throw new ArgumentException("Bynavn skal indeholde min. 2 bogstaver");
+                }
+
+                _cityName = value;
+            }
+        }
+
+        public int PostCode
+        {
+            get { return _postCode; }
+            set
+            {
+                if (int.IsNegative(value))
+                {
+                    throw new ArgumentException("Post nummer skal min indeholde 4 tal. ");
+                }
+
+                _postCode = value;
+            }
+        }
         public Activities()
         {
         }
@@ -105,7 +134,9 @@ namespace DeLyserrodSpejdere.Model
                  $"Begrænset medlemer : {LimitOfMemebers} \n" +
                  $"Begrænset alder : {AgeRestrictions} År \n" +
                  $"Special tegn ? : {SpecialCharacter} \n" +
-                 $"Området : {City} \n";
+                 $"Adresse : {Address} \n"+
+                 $"Bynavn : {CityName} \n"+
+                 $"Post nummer : {PostCode} \n";
         }
     }
 }

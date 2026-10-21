@@ -17,7 +17,27 @@ namespace ConsolAppForSpejder
             aktivitet.LimitOfMemebers = 2;
             aktivitet.AgeRestrictions = 15;
             aktivitet.SpecialCharacter = SpecialCharacter.Balmaerke;
-            aktivitet.City = "Roskilde 4000";
+            aktivitet.Address = "SpejderVej 13";
+            aktivitet.CityName = "Roskilde";
+            aktivitet.PostCode = 4000;
+
+            Activities aktivitet1 = new();
+            aktivitet1.NameOfActivites = " SkoveTur ";
+            aktivitet1.DetailsAboutActivites = " Vi skal på skove tur og plukke blåbære";
+            aktivitet1.StartDate = new DateOnly(2026, 11, 25);
+            aktivitet1.StartTime = new TimeOnly(09, 00, 00);
+            aktivitet1.EndTime = new TimeOnly(18, 00, 00);
+            aktivitet1.LimitOfMemebers = 25;
+            aktivitet1.AgeRestrictions = 5;
+            aktivitet1.SpecialCharacter = SpecialCharacter.IngenTegn;
+            aktivitet1.Address = "SpejderVej 13";
+            aktivitet1.CityName = "Roskilde";
+            aktivitet1.PostCode = 4000;
+
+            AdminLoginRepo activitiesCreater = new();
+            //activitiesCreater.CreateActivities(aktivitet);
+            activitiesCreater.CreateActivities(aktivitet1);
+
 
             Person testPerson = new();
 
@@ -37,7 +57,8 @@ namespace ConsolAppForSpejder
 
             CreateAccount creater = new();
 
-            creater.Create(testPerson);
+            //creater.Create(testPerson);
+
         }
     }
 }

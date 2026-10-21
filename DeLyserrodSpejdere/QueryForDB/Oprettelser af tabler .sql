@@ -16,21 +16,28 @@
 
 );
 
+ALTER TABLE activities 
+add constraint CityIdFK
+foreign key (CityId)
+references City(CityId)
+
 Create Table Activities 
 (
 
 	ActivitiesId int Primary key IDENTITY , 
-	NameOfActivites NvarChar(50),
+	NameOfActivities NvarChar(50),
 	DetailsAboutActivites NVarChar (350),
 	StartDate Date,
 	StartTime Time(0),
 	EndTime Time(0),
 	LimitOfMembers int ,
 	AgeRestrictions int ,
-	SpecialCharacter NvarChar(50) ,
-	City NvarChar(50)
+	SpecialCharacterId  int ,
+	CityId int foreign key (CityId) references City(CityId),
+	Address NvarChar(50)
 
 );
+
 
 Create Table ActivitiesRegister
 (
