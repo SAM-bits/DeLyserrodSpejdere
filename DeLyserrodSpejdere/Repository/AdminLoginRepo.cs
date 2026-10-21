@@ -1,5 +1,6 @@
 ﻿using DeLyserrodSpejdere.Model;
 using Microsoft.Data.SqlClient;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DeLyserrodSpejdere.Repository
 {
@@ -73,17 +74,58 @@ namespace DeLyserrodSpejdere.Repository
             return list;
         }
 
+        public List<ActivitesRegister> ShowRegisteredInActivities(int id)
+        {
+            DBConnector.ConnectToDB();
+            string sqlComm = @"Select ActivitiesRegister.*, Person.FirstName , Person.LastName , Activities.NameOfActivites,Activities.StartDate   From ActivitiesRegister
+                            inner join Person on ActivitiesRegister.PersonId = Person.Personid
+                            inner join Activities on ActivitiesRegister.ActivitiesId = Activities.ActivitiesId Where Activities.ActivitiesId = @id";
 
+            SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
 
+            cmd.Parameters.AddWithValue(@"id", id);
 
+            List<ActivitesRegister> list = new();
+            ActivitesRegister reg = new();
 
+            SqlDataReader reader = cmd.ExecuteReader();
 
+            while (reader.Read())
+            {
+                reg.ActivitesRegisterId = reader.GetInt32(0);
+                reg.ActivitieId = reader.GetInt32(1);
+                reg.PersonId = reader.GetInt32(2);
+                reg.FirstName = reader.GetString(3);
+                reg.LastName = reader.GetString(4);
+                reg.NameOfActivites = reader.GetString(5);
+                reg.StartDate = DateOnly.FromDateTime(reader.GetDateTime(6));
 
+                list.Add(reg);
+            }
 
+            reader.Close();
 
+            DBConnector.DisconnectToDb();
 
+            return list;
+        }
 
+        public void RemoveUserFromActivitieByPersonId(int id)
+        {
+            DBConnector.ConnectToDB();
 
+            string sqlComm = @"Delete From ActivitiesRegister where PersonId = @id ";
+            SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
+
+            cmd.Parameters.AddWithValue(@"id", id);
+
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                Console.WriteLine($"bruger med Personid ({id}) er blevet fjernet fra aktiviteten.");
+            }
+
+            DBConnector.DisconnectToDb();
+        }
 
         public void DeleteActivitesbyId(int id)
         {
@@ -100,8 +142,5 @@ namespace DeLyserrodSpejdere.Repository
             }
             DBConnector.DisconnectToDb();
         }
-
-
-
     }
 }

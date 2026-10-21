@@ -36,68 +36,70 @@ namespace ConsolAppForSpejder
 
             //AdminLoginRepo activitiesCreater = new();
             //activitiesCreater.CreateActivities(aktivitet);
-            //activitiesCreater.CreateActivities(aktivitet1);
+            ////activitiesCreater.CreateActivities(aktivitet1);
 
-            Person testPerson = new();
-            Person testPerson1 = new();
-            Person testPerson2 = new();
+            //Person testPerson = new();
+            //Person testPerson1 = new();
+            //Person testPerson2 = new();
 
-            testPerson.IsSupervisor = true;
-            testPerson.FirstName = "Saif";
-            testPerson.LastName = "Atyaif";
-            testPerson.Email = "Saifatyaif@gmail.com";
-            testPerson.PhoneNumber = "52177690";
-            testPerson.Age = 35;
-            testPerson.Adress = "Majengen 12";
-            testPerson.CityName = "Solrød Strand";
-            testPerson.PostCode = 2680;
-            testPerson.SpeacialCharacters = SpecialCharacter.Balmaerke;
-            testPerson.UserName = "SaifMadie";
-            testPerson.UserPassword = "123456789!";
-            testPerson.UserPasswordConfirm = "123456789!";
+            //testPerson.IsSupervisor = true;
+            //testPerson.FirstName = "Saif";
+            //testPerson.LastName = "Atyaif";
+            //testPerson.Email = "Saifatyaif@gmail.com";
+            //testPerson.PhoneNumber = "52177690";
+            //testPerson.Age = 35;
+            //testPerson.Adress = "Majengen 12";
+            //testPerson.CityName = "Solrød Strand";
+            //testPerson.PostCode = 2680;
+            //testPerson.SpeacialCharacters = SpecialCharacter.Balmaerke;
+            //testPerson.UserName = "SaifMadie";
+            //testPerson.UserPassword = "123456789!";
+            //testPerson.UserPasswordConfirm = "123456789!";
 
+            //testPerson1.IsSupervisor = true;
+            //testPerson1.FirstName = "Hamza";
+            //testPerson1.LastName = "Madie";
+            //testPerson1.Email = "HamzaMadie@gmail.com";
+            //testPerson1.PhoneNumber = "52447788";
+            //testPerson1.Age = 8;
+            //testPerson1.Adress = "Majengen 12";
+            //testPerson1.CityName = "Solrød Strand";
+            //testPerson1.PostCode = 2680;
+            //testPerson1.SpeacialCharacters = SpecialCharacter.Madlavningsmaerke;
+            //testPerson1.UserName = "HamzaMadie";
+            //testPerson1.UserPassword = "123456789!";
+            //testPerson1.UserPasswordConfirm = "123456789!";
 
-            testPerson1.IsSupervisor = true;
-            testPerson1.FirstName = "Hamza";
-            testPerson1.LastName = "Madie";
-            testPerson1.Email = "HamzaMadie@gmail.com";
-            testPerson1.PhoneNumber = "52447788";
-            testPerson1.Age = 8;
-            testPerson1.Adress = "Majengen 12";
-            testPerson1.CityName = "Solrød Strand";
-            testPerson1.PostCode = 2680;
-            testPerson1.SpeacialCharacters = SpecialCharacter.Madlavningsmaerke;
-            testPerson1.UserName = "HamzaMadie";
-            testPerson1.UserPassword = "123456789!";
-            testPerson1.UserPasswordConfirm = "123456789!";
+            //testPerson2.IsSupervisor = true;
+            //testPerson2.FirstName = "Noora";
+            //testPerson2.LastName = "Atyaif";
+            //testPerson2.Email = "Noora.B.Madie@gmail.com";
+            //testPerson2.PhoneNumber = "85558877";
+            //testPerson2.Age = 7;
+            //testPerson2.Adress = "Majengen 12";
+            //testPerson2.CityName = "Solrød Strand";
+            //testPerson2.PostCode = 2680;
+            //testPerson2.SpeacialCharacters = SpecialCharacter.Knobmaerke;
+            //testPerson2.UserName = "NooraMadie";
+            //testPerson2.UserPassword = "123456789!";
+            //testPerson2.UserPasswordConfirm = "123456789!";
 
+            //CreateAccount creater = new();
 
-            testPerson2.IsSupervisor = true;
-            testPerson2.FirstName = "Noora";
-            testPerson2.LastName = "Atyaif";
-            testPerson2.Email = "Noora.B.Madie@gmail.com";
-            testPerson2.PhoneNumber = "85558877";
-            testPerson2.Age = 7;
-            testPerson2.Adress = "Majengen 12";
-            testPerson2.CityName = "Solrød Strand";
-            testPerson2.PostCode = 2680;
-            testPerson2.SpeacialCharacters = SpecialCharacter.Knobmaerke;
-            testPerson2.UserName = "NooraMadie";
-            testPerson2.UserPassword = "123456789!";
-            testPerson2.UserPasswordConfirm = "123456789!";
-
-
-
-
-            CreateAccount creater = new();
-
-            //creater.Create(testPerson);
-            creater.Create(testPerson1);
-            creater.Create(testPerson2);
+            ////creater.Create(testPerson);
+            //creater.Create(testPerson1);
+            //creater.Create(testPerson2);
 
             AdminLoginRepo test = new();
 
+            test.ShowRegisteredInActivities(1);
 
+            foreach (var item in test.ShowRegisteredInActivities(2))
+            {
+                Console.WriteLine(item);
+            }
+
+            test.RemoveUserFromActivitieByPersonId(1);
         }
     }
 }

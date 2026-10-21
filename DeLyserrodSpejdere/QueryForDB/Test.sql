@@ -46,17 +46,25 @@ end;
 SELECT *
 FROM sys.triggers;
 
-insert into TestLimitReg(TestLimitId)
-values (1)
+insert into ActivitiesRegister(ActivitiesId,PersonId)
+values (2,1)
 
 DELETE FROM Person; DBCC CHECKIDENT ('Person', RESEED, 0);	
 DELETE FROM SpejderLogin; DBCC CHECKIDENT ('SpejderLogin', RESEED, 0);	
 DELETE FROM Activities; DBCC CHECKIDENT ('Activities', RESEED, 0);	
+DELETE FROM ActivitiesRegister; DBCC CHECKIDENT ('ActivitiesRegister', RESEED, 0);	
 
 select * from Person
 select * from SpejderLogin
 select * from Activities
 select * from City
+select * from ActivitiesRegister
+
+
+
+Select ActivitiesRegister.*, Person.FirstName , Person.LastName , Activities.NameOfActivites,Activities.StartDate   From ActivitiesRegister
+inner join Person on ActivitiesRegister.PersonId = Person.Personid
+inner join Activities on ActivitiesRegister.ActivitiesId = Activities.ActivitiesId Where Activities.ActivitiesId = 2;
 
 
 -- viser aktivites med postnummer og bynavn
