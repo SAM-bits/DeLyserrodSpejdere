@@ -33,14 +33,17 @@ namespace DeLyserrodSpejdere.Repository
             DBConnector.DisconnectToDb();
         }
 
-        public List<Activities> ReadByID()
+        public List<Activities> ReadActivitiesByID(int id)
         {
             DBConnector.ConnectToDB();
 
-            string sqlComm = @"select * from Activities ";
-            string sqlCommCity = @"select * from City where  ";
+            string sqlComm = @"select Activities.* ,CityName as City , PostCode as PostCode from Activities
+                                inner join City on City.CityId = Activities.CityId where ActivitiesId = @id; ";
 
             SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
+
+            cmd.Parameters.AddWithValue(@"id", id);
+
             SqlDataReader reader = cmd.ExecuteReader();
 
             List<Activities> list = new();
@@ -52,14 +55,53 @@ namespace DeLyserrodSpejdere.Repository
                 act.NameOfActivites = reader.GetString(1);
                 act.DetailsAboutActivites = reader.GetString(2);
                 act.StartDate = DateOnly.FromDateTime(reader.GetDateTime(3));
-                act.StartTime = TimeOnly.FromDateTime(reader.GetDateTime(4));
-                act.EndTime = TimeOnly.FromDateTime(reader.GetDateTime(5));
+                act.StartTime = TimeOnly.FromTimeSpan(reader.GetTimeSpan(4));
+                act.EndTime = TimeOnly.FromTimeSpan(reader.GetTimeSpan(5));
                 act.LimitOfMemebers = reader.GetInt32(6);
                 act.AgeRestrictions = reader.GetInt32(7);
                 act.SpecialCharacter = (SpecialCharacter)reader.GetInt32(8);
-                act.CityName = reader.GetString(9);
                 act.Address = reader.GetString(10);
+                //city
+                act.CityName = reader.GetString(11);
+                act.PostCode = reader.GetInt32(12);
             }
+            reader.Close();
+
+            list.Add(act);
+            DBConnector.DisconnectToDb();
+
+            return list;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public void DeleteActivitesbyId(int id)
+        {
+            DBConnector.ConnectToDB();
+            string sqlComm = @"Delete from Activities where ActivitiesId = @id";
+
+            SqlCommand cmd = new SqlCommand(sqlComm, DBConnector.SqlConnection);
+
+            cmd.Parameters.AddWithValue(@"id", id);
+
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                Console.WriteLine($"Aktivitet med id = ({id}) er nu slettet. ");
+            }
+            DBConnector.DisconnectToDb();
+        }
+
+
+
     }
 }

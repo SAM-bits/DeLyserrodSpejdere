@@ -57,3 +57,12 @@ select * from Person
 select * from SpejderLogin
 select * from Activities
 select * from City
+
+
+-- viser aktivites med postnummer og bynavn
+
+select Activities.* ,CityName as City , PostCode as PostCode from Activities 
+inner join City on City.CityId = Activities.CityId where ActivitiesId = 2;
+
+
+-- 

@@ -127,16 +127,16 @@ namespace DeLyserrodSpejdere.Model
         {
             return
                  $"Aktivits Id : {ActivitieId} \n" +
-                 $"Navnet på aktiviteten  : {NameOfActivites} \n" +
+                 $"Navnet på aktiviteten : {NameOfActivites} \n" +
                  $"Dato : {StartDate} \n" +
                  $"Start tid : {StartTime} \n" +
                  $"Slut tid  : {EndTime} \n" +
                  $"Begrænset medlemer : {LimitOfMemebers} \n" +
                  $"Begrænset alder : {AgeRestrictions} År \n" +
-                 $"Special tegn ? : {SpecialCharacter} \n" +
+                 $"Special tegn: {SpecialCharacter} \n" +
                  $"Adresse : {Address} \n"+
                  $"Bynavn : {CityName} \n"+
-                 $"Post nummer : {PostCode} \n";
+                 $"Postnummer : {PostCode} \n";
         }
     }
 }
