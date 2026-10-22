@@ -30,12 +30,12 @@ namespace SpejderWeb.Pages
             if (loginOk == true && supervisor == true)
             {
                 Message = "Du er logget ind som en adminstrator";
-                return RedirectToPage("/AdminLogin");
+                return RedirectToPage("/Admin/AdminLogin");
             }
             if (loginOk == true && supervisor == false)
             {
                 Message = "Du er logget ind som en bruger";
-                return RedirectToPage("/UserLogin");
+                return RedirectToPage("/User/UserLogin");
             }
 
             return RedirectToPage("/Login");

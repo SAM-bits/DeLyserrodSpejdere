@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace SpejderWeb.Pages
+namespace SpejderWeb.Pages.User
 {
     public class UserLoginModel : PageModel
     {

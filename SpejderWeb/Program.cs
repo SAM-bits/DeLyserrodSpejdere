@@ -13,6 +13,7 @@ namespace SpejderWeb
             builder.Services.AddRazorPages();
             builder.Services.AddScoped<ICreateAccount, CreateAccount>();
             builder.Services.AddScoped<ILoginRepo, LoginRepo>();
+            builder.Services.AddScoped<IAdminLoginRepo, AdminLoginRepo>();
 
             var app = builder.Build();
 
