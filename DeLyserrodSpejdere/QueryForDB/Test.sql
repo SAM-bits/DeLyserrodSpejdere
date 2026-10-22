@@ -60,11 +60,19 @@ select * from Activities
 select * from City
 select * from ActivitiesRegister 
 
+select SpejderLogin.Username,SpejderLogin.UserPassword , person.IsSupervisor as iSSuperVisor from SpejderLogin
+inner join Person on SpejderLogin.PersonId = Person.PersonId
+
 Select  NameOfActivites as AktivtetsNavn , DetailsAboutActivities as AktivitetsDetaljer , StartDate as OpstartsDato , StartTime as StartTidspunkt,EndTime as SlutTid , AgeRestrictions as AlderGrænse , SpecialCharacter as SpejderTegn , Address as Adresse from Activities
 
 Select ActivitiesRegister.*, Person.FirstName , Person.LastName , Activities.NameOfActivites,Activities.StartDate   From ActivitiesRegister
 inner join Person on ActivitiesRegister.PersonId = Person.Personid
 inner join Activities on ActivitiesRegister.ActivitiesId = Activities.ActivitiesId Where Activities.ActivitiesId = 2;
+
+select SpejderLogin.Username,SpejderLogin.UserPassword , person.IsSupervisor as iSSuperVisor from SpejderLogin
+                                inner join Person on SpejderLogin.PersonId = Person.PersonId 
+                                where SpejderLogin.UserName='SaifMadie' and SpejderLogin.UserPassword='3299256331!';
+
 
 
 -- viser aktivites med postnummer og bynavn

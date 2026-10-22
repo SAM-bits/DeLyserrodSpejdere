@@ -12,6 +12,7 @@ namespace SpejderWeb
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddScoped<ICreateAccount, CreateAccount>();
+            builder.Services.AddScoped<ILoginRepo, LoginRepo>();
 
             var app = builder.Build();
 

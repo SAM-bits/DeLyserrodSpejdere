@@ -1,0 +1,30 @@
+﻿@page
+@model SpejderWeb.Pages.LoginModel
+@{
+}
+
+<div style="text-align: center; margin-top: 50px;">
+	<h2>Opret Spejder konto</h2>
+
+	<form method="post">
+		<br />
+
+		<div>
+			<label>Brugernavn </label><br />
+			<input asp-for="UserName" />
+		</div>
+
+		<br />
+
+		<div>
+			<label>Kodeordet</label><br />
+			<input asp-for="UserPassword" />
+		</div>
+		<button type="submit">Login</button>
+
+		@if (!string.IsNullOrEmpty(Model.Message))
+		{
+			<p>@Model.Message</p>
+		}
+	</form>
+</div>
