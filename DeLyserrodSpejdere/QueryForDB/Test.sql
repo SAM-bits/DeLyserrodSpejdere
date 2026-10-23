@@ -33,15 +33,15 @@ Values  ('SaifConcert' , 3);
 
 
 
-Create TRIGGER LimitOfGuestFinal
-On TestLimitReg
-after insert as begin 
-if (select Count(*) from TestLimitReg where TestLimitId =(select TestLimitId from inserted))
->(select LimitOfPeople from TestLimits where TestLimitId =(select TestLimitId from inserted))
-begin 
-rollback transaction ; 
-end 
-end;
+--Create TRIGGER LimitOfGuestFinal
+--On TestLimitReg
+--after insert as begin 
+--if (select Count(*) from TestLimitReg where TestLimitId =(select TestLimitId from inserted))
+-->(select LimitOfPeople from TestLimits where TestLimitId =(select TestLimitId from inserted))
+--begin 
+--rollback transaction ; 
+--end 
+--end;
 
 SELECT *
 FROM sys.triggers;
@@ -60,6 +60,10 @@ select * from Activities
 select * from City
 select * from ActivitiesRegister 
 
+Select * from Activities 
+
+
+
 select SpejderLogin.Username,SpejderLogin.UserPassword , person.IsSupervisor as iSSuperVisor from SpejderLogin
 inner join Person on SpejderLogin.PersonId = Person.PersonId
 
@@ -73,7 +77,7 @@ select SpejderLogin.Username,SpejderLogin.UserPassword , person.IsSupervisor as 
                                 inner join Person on SpejderLogin.PersonId = Person.PersonId 
                                 where SpejderLogin.UserName='SaifMadie' and SpejderLogin.UserPassword='3299256331!';
 
-
+Select * from Activities where Activities.ActivitiesId = 1
 
 -- viser aktivites med postnummer og bynavn
 

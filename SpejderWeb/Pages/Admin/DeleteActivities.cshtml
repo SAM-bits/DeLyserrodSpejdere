@@ -2,3 +2,40 @@
 @model SpejderWeb.Pages.Admin.DeleteActivitiesModel
 @{
 }
+
+<div class="btn-group-custom" role="group" aria-label="Aktiviteter">
+
+	<a asp-page="/Admin/CreateActivities" class="btn btn-secondary">
+		Opret en aktivitet
+	</a>
+
+	<a asp-page="/Admin/EditActivities" class="btn btn-secondary">
+		Ændre aktivitet
+	</a>
+
+	<a asp-page="/Admin/ShowActivites" class="btn btn-secondary">
+		Vis aktivitet
+	</a>
+
+	<a asp-page="/Admin/DeleteActivities" class="btn btn-secondary">
+		Slet aktivitet(er)
+	</a>
+
+	<a asp-page="/Admin/RemoveMembersFromActivities" class="btn btn-secondary">
+		Fjern medlem(er) fra aktivitet
+	</a>
+</div>
+
+<form method="post">
+	<br />
+	<div class="mb-3 col-3">
+		<label for="Name">Aktivitetens Id </label>
+		<input asp-for="@Model.Id" class="form-control" placeholder="Skriv aktivitetens Id" />
+	</div>
+
+	<button type="submit" class="btn btn-secondary">Delete</button>
+	@if (!string.IsNullOrEmpty(Model.Message))
+	{
+		<p>@Model.Message</p>
+	}
+</form>

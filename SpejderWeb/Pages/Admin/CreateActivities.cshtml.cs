@@ -1,5 +1,6 @@
 using DeLyserrodSpejdere.Interface;
 using DeLyserrodSpejdere.Model;
+using DeLyserrodSpejdere.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

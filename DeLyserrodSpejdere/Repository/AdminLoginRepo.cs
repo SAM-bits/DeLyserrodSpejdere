@@ -104,6 +104,28 @@ namespace DeLyserrodSpejdere.Repository
             return list;
         }
 
+        public bool ActivitieIdExist(int id)
+        {
+            DBConnector.ConnectToDB();
+
+            string sqlComm = @"Select Count(*) from Activities where Activities.ActivitiesId = @id";
+
+            SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
+
+            cmd.Parameters.AddWithValue(@"id", id);
+
+            int count = (int)cmd.ExecuteScalar();
+
+            if (count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public List<ActivitesRegister> ShowRegisteredInActivities(int id)
         {
             DBConnector.ConnectToDB();

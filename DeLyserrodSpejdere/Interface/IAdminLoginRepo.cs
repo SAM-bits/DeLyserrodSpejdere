@@ -1,9 +1,10 @@
 ﻿using DeLyserrodSpejdere.Model;
 
-namespace DeLyserrodSpejdere.Interface
+namespace DeLyserrodSpejdere.Repository
 {
     public interface IAdminLoginRepo
     {
+        bool ActivitieIdExist(int id);
         void CreateActivities(Activities act);
         void DeleteActivitesbyId(int id);
         List<Activities> ReadActivitiesByID(int id);

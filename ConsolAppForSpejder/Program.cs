@@ -7,19 +7,19 @@ namespace ConsolAppForSpejder
     {
         private static void Main(string[] args)
         {
-            ////Activities aktivitet = new();
-            ////aktivitet.ActivitieId = 1;
-            ////aktivitet.NameOfActivites = " Bål hygge ";
-            ////aktivitet.DetailsAboutActivites = " Vi skal lave bål og skumfiduser";
-            ////aktivitet.StartDate = new DateOnly(2026, 10, 25);
-            ////aktivitet.StartTime = new TimeOnly(09, 00, 00);
-            ////aktivitet.EndTime = new TimeOnly(18, 00, 00);
-            ////aktivitet.LimitOfMemebers = 2;
-            ////aktivitet.AgeRestrictions = 15;
-            ////aktivitet.SpecialCharacter = SpecialCharacter.Balmaerke;
-            ////aktivitet.Address = "SpejderVej 13";
-            ////aktivitet.CityName = "Roskilde";
-            ////aktivitet.PostCode = 4000;
+            //Activities aktivitet = new();
+            //aktivitet.ActivitieId = 1;
+            //aktivitet.NameOfActivites = " Bål hygge ";
+            //aktivitet.DetailsAboutActivites = " Vi skal lave bål og skumfiduser";
+            //aktivitet.StartDate = new DateOnly(2026, 10, 25);
+            //aktivitet.StartTime = new TimeOnly(09, 00, 00);
+            //aktivitet.EndTime = new TimeOnly(18, 00, 00);
+            //aktivitet.LimitOfMemebers = 2;
+            //aktivitet.AgeRestrictions = 15;
+            //aktivitet.SpecialCharacter = SpecialCharacter.Balmaerke;
+            //aktivitet.Address = "SpejderVej 13";
+            //aktivitet.CityName = "Roskilde";
+            //aktivitet.PostCode = 4000;
 
             //Activities aktivitet1 = new();
             //aktivitet1.ActivitieId = 1;
@@ -35,9 +35,9 @@ namespace ConsolAppForSpejder
             //aktivitet1.CityName = "Roskilde";
             //aktivitet1.PostCode = 4000;
 
-            ////AdminLoginRepo activitiesCreater = new();
-            ////activitiesCreater.CreateActivities(aktivitet);
-            //////activitiesCreater.CreateActivities(aktivitet1);
+            //AdminLoginRepo activitiesCreater = new();
+            //activitiesCreater.CreateActivities(aktivitet);
+            //activitiesCreater.CreateActivities(aktivitet1);
 
             ////Person testPerson = new();
             ////Person testPerson1 = new();
@@ -93,6 +93,16 @@ namespace ConsolAppForSpejder
 
             //AdminLoginRepo test = new();
 
+            //if (test.ActivitieIdExist(2) == true)
+            //{
+            //    test.DeleteActivitesbyId(2);
+            //    Console.WriteLine("Activitet er blevet slettet ");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Activitet ikke fundet");
+            //}
+
             ////test.ShowRegisteredInActivities(1);
 
             ////foreach (var item in test.ShowRegisteredInActivities(2))
@@ -117,9 +127,9 @@ namespace ConsolAppForSpejder
             ////user.JoinActivitiesByPersonId(2, 3);
             //user.LeaveActivities(2);
 
-            LoginRepo log = new();
+            //LoginRepo log = new();
 
-            Console.WriteLine(log.LoginController("SaifMadie", "3299256331!"));
+            //Console.WriteLine(log.LoginController("SaifMadie", "3299256331!"));
         }
     }
 }

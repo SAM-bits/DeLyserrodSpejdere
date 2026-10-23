@@ -43,3 +43,10 @@ body {
         width: 100%;
     }
 }
+
+.btn-group-custom-center {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+}
