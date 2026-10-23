@@ -1,4 +1,228 @@
 ﻿@page
+@using DeLyserrodSpejdere.Model
 @model SpejderWeb.Pages.Admin.EditActivitiesModel
 @{
 }
+
+<div class="btn-group-custom-center" role="group" aria-label="Aktiviteter">
+
+	<a asp-page="/Admin/CreateActivities" class="btn btn-secondary">
+		Opret en aktivitet
+	</a>
+
+	<a asp-page="/Admin/EditActivities" class="btn btn-secondary">
+		Ændre aktivitet
+	</a>
+
+	<a asp-page="/Admin/ShowActivites" class="btn btn-secondary">
+		Vis aktivitet
+	</a>
+
+	<a asp-page="/Admin/DeleteActivities" class="btn btn-secondary">
+		Slet aktivitet(er)
+	</a>
+
+	<a asp-page="/Admin/RemoveMembersFromActivities" class="btn btn-secondary">
+		Fjern medlem(er) fra aktivitet
+	</a>
+</div>
+
+<div class="centerText">
+
+	<form method="Post" asp-page-handler="SearchId">
+		<div class="mb-3 col-15">
+			<label for="Name">Aktivitetens Id</label>
+			<input asp-for="@Model.Id" class="form-control" placeholder="Skriv aktivitetens id" />
+		</div>
+
+		<button type="submit" class="btn btn-secondary">Søg</button>
+		@if (!string.IsNullOrEmpty(Model.Message))
+		{
+			<p>@Model.Message</p>
+		}
+	</form>
+</div>
+
+<br />
+@foreach (@Activities item in Model.ActivitiesList)
+{
+
+	<form method="post" asp-page-handler="Update">
+
+		<input type="hidden" name="id" value="@item.ActivitieId" />
+
+		<div class="mb-3">
+			<label for="Name">Aktivitetens navn</label>
+			<input name="UpdatedActivities.NameOfActivites" class="form-control" value="@item.NameOfActivites" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">Aktivitetens beskrevelse</label>
+			<textarea name="UpdatedActivities.DetailsAboutActivites" class="form-control">@item.DetailsAboutActivites</textarea>
+		</div>
+
+		<div class="mb-3">
+
+			<label for="Name">Nuværende dato </label>
+			<input ="UpdatedActivities.StartDate" class="form-control" value="@item.StartDate" />
+			<label for="Name">Updater dato </label>
+			<input name="UpdatedActivities.StartDate" type="date" class="form-control" value="@item.StartDate" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">Aktivitets start tidspunkt </label>
+			<input name="UpdatedActivities.StartTime" type="time" class="form-control" value="@item.StartTime" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">Aktivitets slut tidspunkt</label>
+			<input name="UpdatedActivities.EndTime" type="time" class="form-control" value="@item.EndTime" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">Begrænset antal medlemmer</label>
+			<input name="UpdatedActivities.LimitOfMemebers" class="form-control" value="@item.LimitOfMemebers" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">Alder begrænsninger </label>
+			<input name="UpdatedActivities.AgeRestrictions" class="form-control" value="@item.AgeRestrictions" />
+		</div>
+
+		<div>
+			<label>Krav for Spejdertegn? </label><br />
+
+			<select asp-for="UpdatedActivities.SpecialCharacter">
+
+				<option value="@item.SpecialCharacter">@item.SpecialCharacter</option>
+				<option value="IngenTegn">Ingen tegn</option>
+				<option value="Lejrmaerke">Lejrmærke</option>
+				<option value="Balmaerke">Bålmærke</option>
+				<option value="Orienteringsmaerke">Orienteringsmærke</option>
+				<option value="Overnatningsmaerke">Overnatningsmærke</option>
+				<option value="Naturmaerke">Naturmærke</option>
+				<option value="Forstehjaelpsmaerke">Førstehjælpsmærke</option>
+				<option value="Knobmaerke">Knobmærke</option>
+				<option value="Madlavningsmaerke">Madlavningsmærke</option>
+				<option value="Vandremaerke">Vandremærke</option>
+				<option value="Pionermaerke">Pionermærke</option>
+			</select>
+		</div>
+
+		<br />
+
+		<div class="mb-3">
+			<label for="Name">Adresse  </label>
+			<input name="UpdatedActivities.Address" class="form-control" value="@item.Address" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">By  </label>
+			<input name="UpdatedActivities.CityName" class="form-control" value="@item.CityName" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">Postnummber  </label>
+			<input name="UpdatedActivities.PostCode" class="form-control" value="@item.PostCode" />
+		</div>
+
+		<button type="submit" class="btn btn-secondary">Updater aktivitet</button>
+		@if (!string.IsNullOrEmpty(Model.Message))
+		{
+			<p>@Model.Message</p>
+		}
+	</form>
+
+}
+
+@*
+@foreach (@Activities item in Model.ActivitiesList)
+{
+
+	<form method="post" asp-page-handler="Update">
+
+		<input type="hidden" name="id" value="@item.ActivitieId" />
+
+		<div class="mb-3">
+			<label for="Name">Aktivitetens navn</label>
+			<input asp-for="UpdatedActivities.NameOfActivites" class="form-control" value="@item.NameOfActivites" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">Aktivitetens beskrevelse</label>
+			<textarea name="UpdatedActivities.DetailsAboutActivites" class="form-control">@item.DetailsAboutActivites</textarea>
+		</div>
+
+		<div class="mb-3">
+
+			<label for="Name">Nuværende dato </label>
+			<input ="UpdatedActivities.StartDate" class="form-control" value="@item.StartDate" />
+			<label for="Name">Updater dato </label>
+			<input asp-for="UpdatedActivities.StartDate" type="date" class="form-control" value="@item.StartDate" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">Aktivitets start tidspunkt </label>
+			<input asp-for="UpdatedActivities.StartTime" type="time" class="form-control" value="@item.StartTime" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">Aktivitets slut tidspunkt</label>
+			<input asp-for="UpdatedActivities.EndTime" type="time" class="form-control" value="@item.EndTime" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">Begrænset antal medlemmer</label>
+			<input asp-for="UpdatedActivities.LimitOfMemebers" class="form-control" value="@item.LimitOfMemebers" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">Alder begrænsninger </label>
+			<input asp-for="UpdatedActivities.AgeRestrictions" class="form-control" value="@item.AgeRestrictions" />
+		</div>
+
+		<div>
+			<label>Krav for Spejdertegn? </label><br />
+
+			<select asp-for="UpdatedActivities.SpecialCharacter">
+
+				<option value="@item.SpecialCharacter">@item.SpecialCharacter</option>
+				<option value="IngenTegn">Ingen tegn</option>
+				<option value="Lejrmaerke">Lejrmærke</option>
+				<option value="Balmaerke">Bålmærke</option>
+				<option value="Orienteringsmaerke">Orienteringsmærke</option>
+				<option value="Overnatningsmaerke">Overnatningsmærke</option>
+				<option value="Naturmaerke">Naturmærke</option>
+				<option value="Forstehjaelpsmaerke">Førstehjælpsmærke</option>
+				<option value="Knobmaerke">Knobmærke</option>
+				<option value="Madlavningsmaerke">Madlavningsmærke</option>
+				<option value="Vandremaerke">Vandremærke</option>
+				<option value="Pionermaerke">Pionermærke</option>
+			</select>
+		</div>
+
+		<br />
+
+		<div class="mb-3">
+			<label for="Name">Adresse  </label>
+			<input asp-for="UpdatedActivities.Address" class="form-control" value="@item.Address" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">By  </label>
+			<input asp-for="UpdatedActivities.CityName" class="form-control" value="@item.CityName" />
+		</div>
+
+		<div class="mb-3">
+			<label for="Name">Postnummber  </label>
+			<input asp-for="UpdatedActivities.PostCode" class="form-control" value="@item.PostCode" />
+		</div>
+
+		<button type="submit" class="btn btn-secondary">Updater aktivitet</button>
+		@if (!string.IsNullOrEmpty(Model.Message))
+		{
+			<p>@Model.Message</p>
+		}
+	</form>
+
+} *@

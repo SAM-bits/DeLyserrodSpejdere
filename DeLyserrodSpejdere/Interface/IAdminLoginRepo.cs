@@ -10,6 +10,6 @@ namespace DeLyserrodSpejdere.Repository
         List<Activities> ReadActivitiesByID(int id);
         void RemoveUserFromActivitieByPersonId(int id);
         List<ActivitesRegister> ShowRegisteredInActivities(int id);
-        void UpdateActivitie(Activities upAc);
+        void UpdateActivitie(Activities upAc,int id);
     }
 }

@@ -25,14 +25,14 @@ namespace SpejderWeb.Pages
 
         public IActionResult OnPost()
         {
-            (bool loginOk, bool supervisor) = _login.LoginController(UserName, UserPassword);
+            (bool isUser, bool isSuper) = _login.LoginController(UserName, UserPassword);
 
-            if (loginOk == true && supervisor == true)
+            if (isUser == true && isSuper == true)
             {
                 Message = "Du er logget ind som en adminstrator";
                 return RedirectToPage("/Admin/AdminLogin");
             }
-            if (loginOk == true && supervisor == false)
+            if (isUser == true && isSuper == false)
             {
                 Message = "Du er logget ind som en bruger";
                 return RedirectToPage("/User/UserLogin");

@@ -35,15 +35,15 @@ namespace DeLyserrodSpejdere.Repository
             DBConnector.DisconnectToDb();
         }
 
-        public void UpdateActivitie(Activities upAc)
+        public void UpdateActivitie(Activities upAc, int id)
         {
             DBConnector.ConnectToDB();
             string sqlComm = @"Update Activities
                            SET NameOfActivites =@NameOfActivites ,DetailsAboutActivities=@DetailsAboutActivities, StartDate=@StartDate,StartTime=@StartTime,EndTime=@EndTime,LimitOfMembers=@LimitOfMembers,AgeRestrictions=@AgeRestrictions , SpecialCharacter =@SpecialCharacter,Address=@Address,CityId=(Select CityId from City where CityName=@CityName And PostCode=@PostCode)
-                            Where ActivitiesId = @ActivitiesId";
+                            Where ActivitiesId = @Id";
 
             SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
-            cmd.Parameters.AddWithValue(@"ActivitiesId", upAc.ActivitieId);
+            cmd.Parameters.AddWithValue(@"Id", id);
             cmd.Parameters.AddWithValue(@"NameOfActivites", upAc.NameOfActivites);
             cmd.Parameters.AddWithValue(@"DetailsAboutActivities", upAc.DetailsAboutActivites);
             cmd.Parameters.AddWithValue(@"StartDate", upAc.StartDate);
@@ -58,7 +58,7 @@ namespace DeLyserrodSpejdere.Repository
 
             if (cmd.ExecuteNonQuery() > 0)
             {
-                Console.WriteLine($"Updatering af Aktivitet med aktivetes id ({upAc.ActivitieId}) er updateret.");
+                Console.WriteLine($"Updatering af Aktivitet med aktivetes id ({id}) er updateret.");
             }
 
             DBConnector.DisconnectToDb();

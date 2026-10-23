@@ -7,19 +7,18 @@ namespace ConsolAppForSpejder
     {
         private static void Main(string[] args)
         {
-            //Activities aktivitet = new();
-            //aktivitet.ActivitieId = 1;
-            //aktivitet.NameOfActivites = " Bål hygge ";
-            //aktivitet.DetailsAboutActivites = " Vi skal lave bål og skumfiduser";
-            //aktivitet.StartDate = new DateOnly(2026, 10, 25);
-            //aktivitet.StartTime = new TimeOnly(09, 00, 00);
-            //aktivitet.EndTime = new TimeOnly(18, 00, 00);
-            //aktivitet.LimitOfMemebers = 2;
-            //aktivitet.AgeRestrictions = 15;
-            //aktivitet.SpecialCharacter = SpecialCharacter.Balmaerke;
-            //aktivitet.Address = "SpejderVej 13";
-            //aktivitet.CityName = "Roskilde";
-            //aktivitet.PostCode = 4000;
+            Activities aktivitet = new();
+            aktivitet.NameOfActivites = " lort ";
+            aktivitet.DetailsAboutActivites = " Vi skal lave bål og skumfiduser";
+            aktivitet.StartDate = new DateOnly(2026, 10, 25);
+            aktivitet.StartTime = new TimeOnly(09, 00, 00);
+            aktivitet.EndTime = new TimeOnly(18, 00, 00);
+            aktivitet.LimitOfMemebers = 2;
+            aktivitet.AgeRestrictions = 15;
+            aktivitet.SpecialCharacter = SpecialCharacter.Balmaerke;
+            aktivitet.Address = "SpejderVej 13";
+            aktivitet.CityName = "Roskilde";
+            aktivitet.PostCode = 4000;
 
             //Activities aktivitet1 = new();
             //aktivitet1.ActivitieId = 1;
@@ -130,6 +129,10 @@ namespace ConsolAppForSpejder
             //LoginRepo log = new();
 
             //Console.WriteLine(log.LoginController("SaifMadie", "3299256331!"));
+
+            AdminLoginRepo test = new();
+
+            test.UpdateActivitie(aktivitet, 5);
         }
     }
 }
