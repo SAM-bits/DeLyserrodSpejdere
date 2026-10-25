@@ -47,7 +47,18 @@ SELECT *
 FROM sys.triggers;
 
 insert into ActivitiesRegister(ActivitiesId,PersonId)
-values (2,1)
+values (5,1)
+insert into ActivitiesRegister(ActivitiesId,PersonId)
+values (5,2)
+insert into ActivitiesRegister(ActivitiesId,PersonId)
+values (5,3)
+insert into ActivitiesRegister(ActivitiesId,PersonId)
+values (5,4)
+insert into ActivitiesRegister(ActivitiesId,PersonId)
+values (5,5)
+
+delete from ActivitiesRegister where PersonId=  1
+
 
 DELETE FROM Person; DBCC CHECKIDENT ('Person', RESEED, 0);	
 DELETE FROM SpejderLogin; DBCC CHECKIDENT ('SpejderLogin', RESEED, 0);	
@@ -62,6 +73,18 @@ select * from ActivitiesRegister
 
 Select * from Activities 
 
+
+Select  Activities.NameOfActivites as AktivitieNavn ,Activities.StartDate as StartDato ,Activities.Address as Adresse ,Person.FirstName as FistName ,Person.LastName as LastName , Person.PhoneNumber as PhoneNumber , ActivitiesRegister.Personid as PersonId From ActivitiesRegister
+inner join Activities on ActivitiesRegister.ActivitiesId = Activities.ActivitiesId
+inner join Person on ActivitiesRegister.PersonId = Person.PersonId
+where ActivitiesRegister.ActivitiesId = 5 or ActivitiesRegister.PersonId = 0
+
+Update Activities 
+set LimitOfMembers = 5
+where ActivitiesId = 5
+
+
+Select Count(*) from Person where Person.Personid =6
 
 
 select SpejderLogin.Username,SpejderLogin.UserPassword , person.IsSupervisor as iSSuperVisor from SpejderLogin

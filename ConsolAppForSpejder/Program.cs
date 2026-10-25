@@ -7,18 +7,18 @@ namespace ConsolAppForSpejder
     {
         private static void Main(string[] args)
         {
-            Activities aktivitet = new();
-            aktivitet.NameOfActivites = " lort ";
-            aktivitet.DetailsAboutActivites = " Vi skal lave bål og skumfiduser";
-            aktivitet.StartDate = new DateOnly(2026, 10, 25);
-            aktivitet.StartTime = new TimeOnly(09, 00, 00);
-            aktivitet.EndTime = new TimeOnly(18, 00, 00);
-            aktivitet.LimitOfMemebers = 2;
-            aktivitet.AgeRestrictions = 15;
-            aktivitet.SpecialCharacter = SpecialCharacter.Balmaerke;
-            aktivitet.Address = "SpejderVej 13";
-            aktivitet.CityName = "Roskilde";
-            aktivitet.PostCode = 4000;
+            //Activities aktivitet = new();
+            //aktivitet.NameOfActivites = " lort ";
+            //aktivitet.DetailsAboutActivites = " Vi skal lave bål og skumfiduser";
+            //aktivitet.StartDate = new DateOnly(2026, 10, 25);
+            //aktivitet.StartTime = new TimeOnly(09, 00, 00);
+            //aktivitet.EndTime = new TimeOnly(18, 00, 00);
+            //aktivitet.LimitOfMemebers = 2;
+            //aktivitet.AgeRestrictions = 15;
+            //aktivitet.SpecialCharacter = SpecialCharacter.Balmaerke;
+            //aktivitet.Address = "SpejderVej 13";
+            //aktivitet.CityName = "Roskilde";
+            //aktivitet.PostCode = 4000;
 
             //Activities aktivitet1 = new();
             //aktivitet1.ActivitieId = 1;
@@ -39,8 +39,8 @@ namespace ConsolAppForSpejder
             //activitiesCreater.CreateActivities(aktivitet1);
 
             ////Person testPerson = new();
-            ////Person testPerson1 = new();
-            ////Person testPerson2 = new();
+            //Person testPerson1 = new();
+            //Person testPerson2 = new();
 
             ////testPerson.IsSupervisor = true;
             ////testPerson.FirstName = "Saif";
@@ -56,39 +56,37 @@ namespace ConsolAppForSpejder
             ////testPerson.UserPassword = "123456789!";
             ////testPerson.UserPasswordConfirm = "123456789!";
 
-            ////testPerson1.IsSupervisor = true;
-            ////testPerson1.FirstName = "Hamza";
-            ////testPerson1.LastName = "Madie";
-            ////testPerson1.Email = "HamzaMadie@gmail.com";
-            ////testPerson1.PhoneNumber = "52447788";
-            ////testPerson1.Age = 8;
-            ////testPerson1.Adress = "Majengen 12";
-            ////testPerson1.CityName = "Solrød Strand";
-            ////testPerson1.PostCode = 2680;
-            ////testPerson1.SpeacialCharacters = SpecialCharacter.Madlavningsmaerke;
-            ////testPerson1.UserName = "HamzaMadie";
-            ////testPerson1.UserPassword = "123456789!";
-            ////testPerson1.UserPasswordConfirm = "123456789!";
+            //testPerson1.FirstName = "Hamza";
+            //testPerson1.LastName = "Madie";
+            //testPerson1.Email = "HamzaMadie@gmail.com";
+            //testPerson1.PhoneNumber = "52447788";
+            //testPerson1.Age = 8;
+            //testPerson1.Adress = "Majengen 12";
+            //testPerson1.CityName = "Solrød Strand";
+            //testPerson1.PostCode = 2680;
+            //testPerson1.SpeacialCharacters = SpecialCharacter.Madlavningsmaerke;
+            //testPerson1.UserName = "HamzaMadie";
+            //testPerson1.UserPassword = "123456789!";
+            //testPerson1.UserPasswordConfirm = "123456789!";
 
-            ////testPerson2.IsSupervisor = true;
-            ////testPerson2.FirstName = "Noora";
-            ////testPerson2.LastName = "Atyaif";
-            ////testPerson2.Email = "Noora.B.Madie@gmail.com";
-            ////testPerson2.PhoneNumber = "85558877";
-            ////testPerson2.Age = 7;
-            ////testPerson2.Adress = "Majengen 12";
-            ////testPerson2.CityName = "Solrød Strand";
-            ////testPerson2.PostCode = 2680;
-            ////testPerson2.SpeacialCharacters = SpecialCharacter.Knobmaerke;
-            ////testPerson2.UserName = "NooraMadie";
-            ////testPerson2.UserPassword = "123456789!";
-            ////testPerson2.UserPasswordConfirm = "123456789!";
+            //testPerson2.FirstName = "Noora";
+            //testPerson2.LastName = "Atyaif";
+            //testPerson2.Email = "Noora.B.Madie@gmail.com";
+            //testPerson2.PhoneNumber = "85558877";
+            //testPerson2.Age = 7;
+            //testPerson2.Adress = "Majengen 12";
+            //testPerson2.CityName = "Solrød Strand";
+            //testPerson2.PostCode = 2680;
+            //testPerson2.SpeacialCharacters = SpecialCharacter.Knobmaerke;
+            //testPerson2.UserName = "NooraMadie";
+            //testPerson2.UserPassword = "123456789!";
+            //testPerson2.UserPasswordConfirm = "123456789!";
 
-            ////CreateAccount creater = new();
+            //CreateAccount creater = new();
 
-            //////creater.Create(testPerson);
-            ////creater.Create(testPerson1);
-            ////creater.Create(testPerson2);
+            ////creater.Create(testPerson);
+            //creater.Create(testPerson1);
+            //creater.Create(testPerson2);
 
             //AdminLoginRepo test = new();
 
@@ -130,9 +128,28 @@ namespace ConsolAppForSpejder
 
             //Console.WriteLine(log.LoginController("SaifMadie", "3299256331!"));
 
-            AdminLoginRepo test = new();
+            //    AdminLoginRepo test = new();
 
-            test.UpdateActivitie(aktivitet, 5);
+            //    test.UpdateActivitie(aktivitet, 5);
+
+            AdminLoginRepo admin = new();
+
+            Console.WriteLine(admin.MemebersRegisterToActivites(5, 0).ToString());
+
+            List<Person> person = new();
+            List<Activities> acts = new();
+
+            (acts, person) = admin.MemebersRegisterToActivites(5, 0);
+
+            foreach (var item in acts)
+            {
+                Console.WriteLine(item);
+            }
+
+            foreach (var item in person)
+            {
+                Console.WriteLine(item.PersonId);
+            }
         }
     }
 }

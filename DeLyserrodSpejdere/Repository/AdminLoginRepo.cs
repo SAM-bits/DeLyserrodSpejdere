@@ -116,6 +116,30 @@ namespace DeLyserrodSpejdere.Repository
 
             int count = (int)cmd.ExecuteScalar();
 
+            DBConnector.DisconnectToDb();
+
+            if (count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool PersonIdExist(int id)
+        {
+            DBConnector.ConnectToDB();
+            string sqlComm = @"Select Count(*) from Person where Person.Personid =@id";
+            SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
+
+            cmd.Parameters.AddWithValue(@"id", id);
+
+            int count = (int)cmd.ExecuteScalar();
+
+            DBConnector.DisconnectToDb();
+
             if (count > 0)
             {
                 return true;
@@ -166,7 +190,7 @@ namespace DeLyserrodSpejdere.Repository
         {
             DBConnector.ConnectToDB();
 
-            string sqlComm = @"Delete From ActivitiesRegister where PersonId = @id ";
+            string sqlComm = @"Delete From ActivitiesRegister where ActivitiesRegister.PersonId = @id ";
             SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
 
             cmd.Parameters.AddWithValue(@"id", id);
@@ -177,6 +201,54 @@ namespace DeLyserrodSpejdere.Repository
             }
 
             DBConnector.DisconnectToDb();
+        }
+
+        public (List<Activities>, List<Person>) MemebersRegisterToActivites(int acId, int persId)
+        {
+            DBConnector.ConnectToDB();
+
+            string sqlComm = @"Select Activities.NameOfActivites as AktivitieNavn ,Activities.StartDate as StartDato ,Activities.Address as Adresse ,Person.FirstName as FistName ,Person.LastName as LastName , Person.PhoneNumber as PhoneNumber , ActivitiesRegister.PersonId as PersonId From ActivitiesRegister
+                            inner join Activities on ActivitiesRegister.ActivitiesId = Activities.ActivitiesId
+                            inner join Person on ActivitiesRegister.PersonId = Person.PersonId
+                            where ActivitiesRegister.ActivitiesId = @AcId or ActivitiesRegister.PersonId = @PersId ";
+            SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
+
+            cmd.Parameters.AddWithValue(@"AcId", acId);
+            cmd.Parameters.AddWithValue(@"PersId", persId);
+
+            SqlDataReader reader1 = cmd.ExecuteReader();
+
+            Activities foundAc = new();
+
+            List<Activities> acList = new();
+            List<Person> persList = new();
+
+            while (reader1.Read())
+            {
+                foundAc.NameOfActivites = reader1.GetString(0);
+                foundAc.StartDate = DateOnly.FromDateTime(reader1.GetDateTime(1));
+                foundAc.Address = reader1.GetString(2);
+            }
+            acList.Add(foundAc);
+            reader1.Close();
+
+            SqlDataReader reader2 = cmd.ExecuteReader();
+
+            while (reader2.Read())
+            {
+                Person foundPer = new();
+
+                foundPer.FirstName = reader2.GetString(3);
+                foundPer.LastName = reader2.GetString(4);
+                foundPer.PhoneNumber = reader2.GetString(5);
+                foundPer.PersonId = reader2.GetInt32(6);
+
+                persList.Add(foundPer);
+            }
+
+            reader2.Close();
+            DBConnector.DisconnectToDb();
+            return (acList, persList);
         }
 
         public void DeleteActivitesbyId(int id)
