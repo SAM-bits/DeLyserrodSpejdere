@@ -96,3 +96,10 @@
 	</div>
 
 }
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+	<script>
+		alert('@Model.Message');
+	</script>
+}

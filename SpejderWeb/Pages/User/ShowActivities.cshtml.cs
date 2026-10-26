@@ -29,6 +29,9 @@ namespace SpejderWeb.Pages.User
 
         public int? PersonId { get; set; }
 
+        [TempData]
+        public string Message { get; set; }
+
         public List<Activities> ActivitiesListe { get; set; } = new();
 
         public void OnPostDateSearch()
@@ -43,14 +46,21 @@ namespace SpejderWeb.Pages.User
             ActivitiesListe = _user.SearchForActivitiesByName(AcName, CityName);
         }
 
-        public void OnPostJoinActivitie(int acId)
+        public IActionResult OnPostJoinActivitie(int acId)
         {
             PersonId = HttpContext.Session.GetInt32("LoggedId");
             Console.WriteLine(acId);
             Console.WriteLine(PersonId);
-            if (PersonId > 0 || PersonId != null)
+            if (PersonId > 0 && PersonId != null)
             {
                 _user.JoinActivitiesByPersonId(acId, PersonId);
+                Message = $"Tilføjet til aktiviteten med id : {acId}";
+                return Page();
+            }
+            else
+            {
+                Message = $"Tilmelding er endt med en fejl. prøv igen.";
+                return Page();
             }
         }
     }
