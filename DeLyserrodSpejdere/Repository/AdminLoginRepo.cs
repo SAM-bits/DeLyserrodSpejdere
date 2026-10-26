@@ -64,12 +64,92 @@ namespace DeLyserrodSpejdere.Repository
             DBConnector.DisconnectToDb();
         }
 
+        public List<Activities> SearchForActivities(string dateTime, string dateTime1)
+        {
+            DBConnector.ConnectToDB();
+
+            string sqlComm = @"select  Activities.NameOfActivites as NameAct, Activities.StartDate as StartDate , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber  from ActivitiesRegister
+                inner join Activities on ActivitiesRegister.ActivitiesId=Activities.ActivitiesId
+                inner join City on Activities.CityId = City.CityId
+                where  activities.StartDate between @dateTime and @dateTime1
+                group by ActivitiesRegister.ActivitiesId,Activities.NameOfActivites,StartDate,AgeRestrictions,LimitOfMembers,CityName,PostCode";
+
+            SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
+
+            cmd.Parameters.AddWithValue(@"dateTime", dateTime);
+            cmd.Parameters.AddWithValue(@"dateTime1", dateTime1);
+
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<Activities> list = new();
+
+            while (reader.Read())
+            {
+                Activities act = new();
+
+                act.NameOfActivites = reader.GetString(0);
+                act.StartDate = DateOnly.FromDateTime(reader.GetDateTime(1));
+                act.AgeRestrictions = reader.GetInt32(2);
+                act.LimitOfMemebers = reader.GetInt32(3);
+                act.LimitCounter = reader.GetInt32(4);
+                //city
+                act.CityName = reader.GetString(5);
+                act.PostCode = reader.GetInt32(6);
+                list.Add(act);
+            }
+            reader.Close();
+
+            DBConnector.DisconnectToDb();
+
+            return list;
+        }
+        public List<Activities> SearchForActivitiesByName(string name, string city)
+        {
+            DBConnector.ConnectToDB();
+
+            string sqlComm = @"select  Activities.NameOfActivites as NameAct, Activities.StartDate as StartDate , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber  from ActivitiesRegister
+                inner join Activities on ActivitiesRegister.ActivitiesId=Activities.ActivitiesId
+                inner join City on Activities.CityId = City.CityId
+                where City.CityName like @city or Activities.NameOfActivites like @name
+                group by ActivitiesRegister.ActivitiesId,Activities.NameOfActivites,StartDate,AgeRestrictions,LimitOfMembers,CityName,PostCode";
+
+            SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
+
+            cmd.Parameters.AddWithValue(@"name", "%" + name + "%");
+            cmd.Parameters.AddWithValue(@"city","%"+ city+"%");
+
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<Activities> list = new();
+
+            while (reader.Read())
+            {
+                Activities act = new();
+
+                act.NameOfActivites = reader.GetString(0);
+                act.StartDate = DateOnly.FromDateTime(reader.GetDateTime(1));
+                act.AgeRestrictions = reader.GetInt32(2);
+                act.LimitOfMemebers = reader.GetInt32(3);
+                act.LimitCounter = reader.GetInt32(4);
+                //city
+                act.CityName = reader.GetString(5);
+                act.PostCode = reader.GetInt32(6);
+                list.Add(act);
+            }
+            reader.Close();
+
+            DBConnector.DisconnectToDb();
+
+            return list;
+        }
+
         public List<Activities> ReadActivitiesByID(int id)
         {
             DBConnector.ConnectToDB();
 
-            string sqlComm = @"select Activities.* ,CityName as City , PostCode as PostCode from Activities
-                                inner join City on City.CityId = Activities.CityId where ActivitiesId = @id; ";
+            string sqlComm = @"Select * from Activities where ActivititeId = @id";
 
             SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
 

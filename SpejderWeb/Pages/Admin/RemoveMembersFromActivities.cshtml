@@ -27,68 +27,81 @@
 	</a>
 </div>
 
+<br />
+
 <div class="centerText">
-	<form method="Post" asp-page-handler="ShowMembers">
 
-		<div class="mb-3 col-15">
-			<label for="Name">Aktivitetens Id</label>
-			<input asp-for="@Model.ActivitieId" class="form-control" placeholder="indtast aktivitetens " />
-		</div>
 
-		@if (@Model.ActivitieId > 0)
+
+	<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+
+		<form method="Post" asp-page-handler="ShowMembers">
+
+			<div class="mb-3 col-15">
+				<label for="Name">Aktivitetens Id</label>
+				<input asp-for="@Model.ActivitieId" class="form-control" placeholder="indtast aktivitetens " />
+			</div>
+
+			@if (@Model.ActivitieId > 0)
+			{
+
+				@if (!string.IsNullOrEmpty(Model.ActivitieMessage))
+				{
+					<p>@Model.ActivitieMessage</p>
+				}
+
+			}
+
+			<div class="mb-3 col-15">
+				<label for="Name">Person Id</label>
+				<input asp-for="@Model.PersonId" class="form-control" placeholder="indtast person id " />
+			</div>
+
+			<button type="submit" class="btn btn-secondary">Søg</button>
+
+			@if (@Model.PersonId > 0)
+			{
+
+				@if (!string.IsNullOrEmpty(Model.PersonMessage))
+				{
+					<p>@Model.PersonMessage</p>
+				}
+
+			}
+		</form>
+
+		@foreach (Activities item in Model.ShowActivities)
 		{
 
-			@if (!string.IsNullOrEmpty(Model.ActivitieMessage))
-			{
-				<p>@Model.ActivitieMessage</p>
-			}
+			<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+				<p>Navn på aktivitet: @item.NameOfActivites</p>
+				<p>Start Dato: @item.StartDate</p>
+				<p>Adresse for Aktivitet: @item.Address</p>
+			</div>
+		}
+
+		@foreach (@Person item in Model.ShowPerson)
+		{
+			<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+
+				<pre>Medlems navn: @item.FirstName</pre>
+				<pre>Medlems efternavn: @item.LastName</pre>
+				<pre>Medlems telefon: @item.PhoneNumber</pre>
+
+				<form method="post" asp-page-handler="RemoveUser">
+					<input type="hidden" name="id" value="@item.PersonId" />
+
+					<button type="submit" class="btn btn-secondary">
+						Fjern fra aktivitet
+					</button>
+				</form>
+			</div>
 
 		}
 
-		<div class="mb-3 col-15">
-			<label for="Name">Person Id</label>
-			<input asp-for="@Model.PersonId" class="form-control" placeholder="indtast person id " />
-		</div>
+	</div>
 
-		<button type="submit" class="btn btn-secondary">Søg</button>
 
-		@if (@Model.PersonId > 0)
-		{
 
-			@if (!string.IsNullOrEmpty(Model.PersonMessage))
-			{
-				<p>@Model.PersonMessage</p>
-			}
-
-		}
-	</form>
-
-	@foreach (Activities item in Model.ShowActivities)
-	{
-
-		<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-			<p>Navn på aktivitet: @item.NameOfActivites</p>
-			<p>Start Dato: @item.StartDate</p>
-			<p>Adresse for Aktivitet: @item.Address</p>
-		</div>
-	}
-
-	@foreach (@Person item in Model.ShowPerson)
-	{
-		<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-
-			<pre>Medlems navn: @item.FirstName</pre>
-			<pre>Medlems efternavn: @item.LastName</pre>
-			<pre>Medlems telefon: @item.PhoneNumber</pre>
-
-			<form method="post" asp-page-handler="RemoveUser">
-				<input type="hidden" name="id" value="@item.PersonId" />
-
-				<button type="submit" class="btn btn-secondary">
-					Fjern fra aktivitet
-				</button>
-			</form>
-		</div>
-
-	}
+	
 </div>

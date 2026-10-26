@@ -73,6 +73,29 @@ select * from ActivitiesRegister
 
 Select * from Activities 
 
+select  Activities.NameOfActivites as NameAct, Activities.StartDate as StartDate , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber  from ActivitiesRegister
+inner join Activities on ActivitiesRegister.ActivitiesId=Activities.ActivitiesId
+inner join City on Activities.CityId = City.CityId
+where City.CityName like '' or Activities.NameOfActivites like '%final%'
+group by ActivitiesRegister.ActivitiesId,Activities.NameOfActivites,StartDate,AgeRestrictions,LimitOfMembers,CityName,PostCode
+
+select * ,NameOfActivites , StartDate, Activities.AgeRestrictions , Activities.LimitOfMembers, Count(ActivitiesRegister.ActivitiesId) as MemberCounter, CityName as City , PostCode as PostCode from Activities
+
+inner join City on City.CityId = Activities.CityId
+where ActivitiesId = 5
+
+select ActivitiesRegister.* ,Activities.NameOfActivites as Name , Activities.StartDate as Date ,Activities.AgeRestrictions as Age , 
+Activities.LimitOfMembers as Limit, Count(ActivitiesRegister.ActivitiesId) as CounterMember from ActivitiesRegister
+inner join Activities on ActivitiesRegister.ActivitiesId = Activities.ActivitiesId
+where Activities.ActivitiesId = 5
+group by Activities.ActivitiesId
+
+
+select ActivitiesRegister.* ,Activities.NameOfActivites as NameOf , Activities.StartDate as DateOf ,Activities.AgeRestrictions as Age , 
+Activities.LimitOfMembers as Limit, Count(ActivitiesRegister.ActivitiesId) as CounterLimit from ActivitiesRegister
+inner join Activities on ActivitiesRegister.ActivitiesId = Activities.ActivitiesId
+where Activities.ActivitiesId = 5
+
 
 Select  Activities.NameOfActivites as AktivitieNavn ,Activities.StartDate as StartDato ,Activities.Address as Adresse ,Person.FirstName as FistName ,Person.LastName as LastName , Person.PhoneNumber as PhoneNumber , ActivitiesRegister.Personid as PersonId From ActivitiesRegister
 inner join Activities on ActivitiesRegister.ActivitiesId = Activities.ActivitiesId

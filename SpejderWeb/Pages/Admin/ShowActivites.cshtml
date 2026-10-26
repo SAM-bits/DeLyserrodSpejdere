@@ -1,4 +1,118 @@
 ﻿@page
+@using DeLyserrodSpejdere.Model
 @model SpejderWeb.Pages.Admin.ShowAktivitesModel
 @{
+}
+<div class="btn-group-custom-center" role="group" aria-label="Aktiviteter">
+
+	<a asp-page="/Admin/CreateActivities" class="btn btn-secondary">
+		Opret en aktivitet
+	</a>
+
+	<a asp-page="/Admin/EditActivities" class="btn btn-secondary">
+		Ændre aktivitet
+	</a>
+
+	<a asp-page="/Admin/ShowActivites" class="btn btn-secondary">
+		Vis aktivitet
+	</a>
+
+	<a asp-page="/Admin/DeleteActivities" class="btn btn-secondary">
+		Slet aktivitet(er)
+	</a>
+
+	<a asp-page="/Admin/RemoveMembersFromActivities" class="btn btn-secondary">
+		Fjern medlem(er) fra aktivitet
+	</a>
+</div>
+
+<br />
+
+
+@* Date search section  *@
+<div class="centerText">
+	<div style="border: 1px solid #ccc; padding: 25px; margin-bottom: 10px;">
+
+		<p>Søg via dato </p>
+		<form method="post" asp-page-handler="SearchDate">
+
+
+			<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+				<div class="mb-10 col-10">
+					<label for="Name">Dato</label>
+					<input asp-for="DateSearch" class="form-control" placeholder="yyyy-mm-dd" />
+
+				</div>
+				<div class="mb-10 col-10">
+					<label for="Name">Mellem</label>
+					<input asp-for="DateSearch1" class="form-control" placeholder="yyyy-mm-dd" />
+
+				</div>
+
+			</div>
+
+
+
+
+
+
+
+			<button type="submit" class="btn btn-secondary">
+				Søg
+			</button>
+		</form>
+
+	</div>
+</div>
+
+@* Name search section  *@
+<div class="centerText">
+	<div style="border: 1px solid #ccc; padding: 25px; margin-bottom: 10px;">
+
+		<p>Søg via navn </p>
+		<form method="post" asp-page-handler="SearchName">
+
+
+
+			<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+				<div class="mb-10 col-10">
+					<label for="Name">Aktivitets navn</label>
+					<input asp-for="ActivitiesName" class="form-control" placeholder="Søg efter bynavn" />
+				</div>
+				<div class="mb-10 col-10">
+					<label for="Name">Bynavn</label>
+					<input asp-for="SearchCity" class="form-control" placeholder="Søg efter bynavn" />
+				</div>
+			</div>
+
+
+
+
+
+
+			<button type="submit" class="btn btn-secondary">
+				Søg
+			</button>
+		</form>
+
+	</div>
+</div>
+
+<br />
+@foreach (Activities item in @Model.ActivitiesListe)
+{
+
+	<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+
+		<pre>Navn : @item.NameOfActivites</pre>
+		<pre>Star Dato : @item.StartDate</pre>
+		<pre>Alder grænser : @item.AgeRestrictions</pre>
+		<pre>Max antal medlememr : @item.LimitOfMemebers</pre>
+		<pre>Antal tilmeldte : @item.LimitCounter</pre>
+		<pre>By : @item.CityName</pre>
+		<pre>Post nummer : @item.PostCode</pre>
+	</div>
+
+
+
 }

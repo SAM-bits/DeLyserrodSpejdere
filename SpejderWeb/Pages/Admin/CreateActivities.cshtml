@@ -2,7 +2,7 @@
 @model SpejderWeb.Pages.Admin.CreateActivitieModel
 @{
 }
-<div class="btn-group-custom" role="group" aria-label="Aktiviteter">
+<div class="centerText" role="group" aria-label="Aktiviteter">
 
 	<a asp-page="/Admin/CreateActivities" class="btn btn-secondary">
 		Opret en aktivitet
@@ -25,81 +25,98 @@
 	</a>
 </div>
 
-<form method="post">
-	<div class="mb-3">
-		<label for="Name">Aktivitetens navn</label>
-		<input asp-for="Activities.NameOfActivites" class="form-control" placeholder="Skriv aktivitetens navn" />
+<br />
+<div class="centerText">
+
+	<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+
+		<form method="post">
+			<div class="mb-3 col-25">
+				<label for="Name">Aktivitetens navn</label>
+				<input asp-for="Activities.NameOfActivites" class="form-control" placeholder="Skriv aktivitetens navn" />
+			</div>
+
+			<div class="mb-3">
+				<label for="Name">Aktivitetens beskrevelse</label>
+				<textarea asp-for="Activities.DetailsAboutActivites" class="form-control" placeholder="Skriv en beskrivelse"></textarea>
+			</div>
+
+			<div class="mb-3">
+				<label for="Name">Aktivitets dato</label>
+				<input asp-for="Activities.StartDate" type="date" class="form-control" />
+			</div>
+
+			<div class="mb-3">
+				<label for="Name">Aktivitets start tidspunkt </label>
+				<input asp-for="Activities.StartTime" type="time" class="form-control" />
+			</div>
+
+			<div class="mb-3">
+				<label for="Name">Aktivitets slut tidspunkt</label>
+				<input asp-for="Activities.EndTime" type="time" class="form-control" />
+			</div>
+
+			<div class="mb-3">
+				<label for="Name">Begrænset antal medlemmer</label>
+				<input asp-for="Activities.LimitOfMemebers" class="form-control" placeholder="Det maks antal medlemer." />
+			</div>
+
+			<div class="mb-3">
+				<label for="Name">Alder begrænsninger </label>
+				<input asp-for="Activities.AgeRestrictions" class="form-control" placeholder="tilladte alder " />
+			</div>
+
+			<div>
+				<label>Krav for Spejdertegn? </label><br />
+
+				<select asp-for="Activities.SpecialCharacter">
+					<option value="">-- Vælg et spejdertegn --</option>
+					<option value="IngenTegn">Ingen tegn</option>
+					<option value="Lejrmaerke">Lejrmærke</option>
+					<option value="Balmaerke">Bålmærke</option>
+					<option value="Orienteringsmaerke">Orienteringsmærke</option>
+					<option value="Overnatningsmaerke">Overnatningsmærke</option>
+					<option value="Naturmaerke">Naturmærke</option>
+					<option value="Forstehjaelpsmaerke">Førstehjælpsmærke</option>
+					<option value="Knobmaerke">Knobmærke</option>
+					<option value="Madlavningsmaerke">Madlavningsmærke</option>
+					<option value="Vandremaerke">Vandremærke</option>
+					<option value="Pionermaerke">Pionermærke</option>
+				</select>
+			</div>
+
+			<br />
+
+			<div class="mb-3">
+				<label for="Name">Adresse  </label>
+				<input asp-for="Activities.Address" class="form-control" placeholder="Adresse for aktiviteten " />
+			</div>
+
+			<div class="mb-3">
+				<label for="Name">By  </label>
+				<input asp-for="Activities.CityName" class="form-control" placeholder="feks. Solrød " />
+			</div>
+
+			<div class="mb-3">
+				<label for="Name">Postnummber  </label>
+				<input asp-for="Activities.PostCode" class="form-control" placeholder="feks. 2680 " />
+			</div>
+
+			<button type="submit" class="btn btn-secondary">Opret aktivitet</button>
+			@if (!string.IsNullOrEmpty(Model.Message))
+			{
+				<p>@Model.Message</p>
+			}
+		</form>
+
 	</div>
+	
+	
 
-	<div class="mb-3">
-		<label for="Name">Aktivitetens beskrevelse</label>
-		<textarea asp-for="Activities.DetailsAboutActivites" class="form-control" placeholder="Skriv en beskrivelse"></textarea>
-	</div>
 
-	<div class="mb-3">
-		<label for="Name">Aktivitets dato</label>
-		<input asp-for="Activities.StartDate" type="date" class="form-control" />
-	</div>
+</div>
 
-	<div class="mb-3">
-		<label for="Name">Aktivitets start tidspunkt </label>
-		<input asp-for="Activities.StartTime" type="time" class="form-control" />
-	</div>
 
-	<div class="mb-3">
-		<label for="Name">Aktivitets slut tidspunkt</label>
-		<input asp-for="Activities.EndTime" type="time" class="form-control" />
-	</div>
 
-	<div class="mb-3">
-		<label for="Name">Begrænset antal medlemmer</label>
-		<input asp-for="Activities.LimitOfMemebers" class="form-control" placeholder="Det maks antal medlemer." />
-	</div>
 
-	<div class="mb-3">
-		<label for="Name">Alder begrænsninger </label>
-		<input asp-for="Activities.AgeRestrictions" class="form-control" placeholder="tilladte alder " />
-	</div>
 
-	<div>
-		<label>Krav for Spejdertegn? </label><br />
-
-		<select asp-for="Activities.SpecialCharacter">
-			<option value="">-- Vælg et spejdertegn --</option>
-			<option value="IngenTegn">Ingen tegn</option>
-			<option value="Lejrmaerke">Lejrmærke</option>
-			<option value="Balmaerke">Bålmærke</option>
-			<option value="Orienteringsmaerke">Orienteringsmærke</option>
-			<option value="Overnatningsmaerke">Overnatningsmærke</option>
-			<option value="Naturmaerke">Naturmærke</option>
-			<option value="Forstehjaelpsmaerke">Førstehjælpsmærke</option>
-			<option value="Knobmaerke">Knobmærke</option>
-			<option value="Madlavningsmaerke">Madlavningsmærke</option>
-			<option value="Vandremaerke">Vandremærke</option>
-			<option value="Pionermaerke">Pionermærke</option>
-		</select>
-	</div>
-
-	<br />
-
-	<div class="mb-3">
-		<label for="Name">Adresse  </label>
-		<input asp-for="Activities.Address" class="form-control" placeholder="Adresse for aktiviteten " />
-	</div>
-
-	<div class="mb-3">
-		<label for="Name">By  </label>
-		<input asp-for="Activities.CityName" class="form-control" placeholder="feks. Solrød " />
-	</div>
-
-	<div class="mb-3">
-		<label for="Name">Postnummber  </label>
-		<input asp-for="Activities.PostCode" class="form-control" placeholder="feks. 2680 " />
-	</div>
-
-	<button type="submit" class="btn btn-secondary">Opret aktivitet</button>
-	@if (!string.IsNullOrEmpty(Model.Message))
-	{
-		<p>@Model.Message</p>
-	}
-</form>

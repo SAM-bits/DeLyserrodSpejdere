@@ -6,6 +6,9 @@ namespace DeLyserrodSpejdere.Repository
     {
         bool ActivitieIdExist(int id);
 
+        List<Activities> SearchForActivities(string dateTime, string dateTime1);
+        List<Activities> SearchForActivitiesByName(string name, string city);
+
         bool PersonIdExist(int id);
 
         void CreateActivities(Activities act);

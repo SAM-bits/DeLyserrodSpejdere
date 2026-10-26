@@ -13,6 +13,7 @@ namespace DeLyserrodSpejdere.Model
         public TimeOnly StartTime { get; set; }
         public TimeOnly EndTime { get; set; }
         public int LimitOfMemebers { get; set; }
+        public int LimitCounter { get; set; }
         public int _ageRestictions;
         public SpecialCharacter _specialCharacter;
         public string _address;
