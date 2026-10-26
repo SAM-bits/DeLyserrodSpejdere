@@ -2,3 +2,18 @@
 @model SpejderWeb.Pages.User.RemoveFromActivitiesModel
 @{
 }
+
+<div class="btn-group-custom-center" role="group" aria-label="Aktiviteter">
+
+	<a asp-page="/User/ShowActivities" class="btn btn-secondary">
+		Mine tilmeldte aktiviteter
+	</a>
+
+	<a asp-page="/User/ShowActivities" class="btn btn-secondary">
+		Vis tilgængelig aktiviteter
+	</a>
+
+	<a asp-page="/User/RemoveFromActivities" class="btn btn-secondary">
+		Framelde fra aktivitet.
+	</a>
+</div>

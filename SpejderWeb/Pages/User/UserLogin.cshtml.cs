@@ -5,8 +5,5 @@ namespace SpejderWeb.Pages.User
 {
     public class UserLoginModel : PageModel
     {
-        public void OnGet()
-        {
-        }
     }
 }

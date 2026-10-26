@@ -8,11 +8,11 @@ namespace DeLyserrodSpejdere.Repository
 {
     public class LoginRepo : ILoginRepo
     {
-        public (bool, bool) LoginController(string username, string password)
+        public (bool, bool, int) LoginController(string username, string password)
         {
             DBConnector.ConnectToDB();
 
-            string sqlComm = @"select SpejderLogin.Username,SpejderLogin.UserPassword , person.IsSupervisor as iSSuperVisor from SpejderLogin
+            string sqlComm = @"select SpejderLogin.Username,SpejderLogin.UserPassword , person.IsSupervisor as iSSuperVisor , Person.PersonId as PersonId from SpejderLogin
                                 inner join Person on SpejderLogin.PersonId = Person.PersonId
                                 where SpejderLogin.UserName=@UserName and SpejderLogin.UserPassword=@UserPassword";
 
@@ -22,7 +22,7 @@ namespace DeLyserrodSpejdere.Repository
             cmd.Parameters.AddWithValue(@"UserPassword", password);
 
             SqlDataReader reader = cmd.ExecuteReader();
-
+            int loggedId = 0;
             bool usercontrol = false;
             bool isSupervioser = false;
 
@@ -43,10 +43,12 @@ namespace DeLyserrodSpejdere.Repository
                     usercontrol = false;
                     isSupervioser = false;
                 }
+
+                loggedId = reader.GetInt32(3);
             }
 
             DBConnector.DisconnectToDb();
-            return (usercontrol, isSupervioser);
+            return (usercontrol, isSupervioser, loggedId);
         }
     }
 }

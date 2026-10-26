@@ -23,17 +23,21 @@ namespace SpejderWeb.Pages
         [BindProperty]
         public string UserPassword { get; set; }
 
+        private static int LoggedId { get; set; }
+
         public IActionResult OnPost()
         {
-            (bool isUser, bool isSuper) = _login.LoginController(UserName, UserPassword);
+            (bool isUser, bool isSuper, int loggedId) = _login.LoginController(UserName, UserPassword);
 
             if (isUser == true && isSuper == true)
             {
+                HttpContext.Session.SetInt32("LoggedId", loggedId);
                 Message = "Du er logget ind som en adminstrator";
                 return RedirectToPage("/Admin/AdminLogin");
             }
             if (isUser == true && isSuper == false)
             {
+                HttpContext.Session.SetInt32("LoggedId", loggedId);
                 Message = "Du er logget ind som en bruger";
                 return RedirectToPage("/User/UserLogin");
             }

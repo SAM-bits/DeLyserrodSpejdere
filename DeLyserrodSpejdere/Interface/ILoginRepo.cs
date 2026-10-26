@@ -2,6 +2,6 @@
 {
     public interface ILoginRepo
     {
-        (bool, bool) LoginController(string username, string password);
+        (bool, bool, int) LoginController(string username, string password);
     }
 }

@@ -1,4 +1,98 @@
 ﻿@page
+@using DeLyserrodSpejdere.Model
 @model SpejderWeb.Pages.User.ShowActivitiesModel
 @{
+}
+
+<div class="btn-group-custom-center" role="group" aria-label="Aktiviteter">
+
+	<a asp-page="/User/ShowActivities" class="btn btn-secondary">
+		Mine tilmeldte aktiviteter
+	</a>
+
+	<a asp-page="/User/ShowActivities" class="btn btn-secondary">
+		Vis tilgængelig aktiviteter
+	</a>
+
+	<a asp-page="/User/RemoveFromActivities" class="btn btn-secondary">
+		Framelde fra aktivitet.
+	</a>
+</div>
+<br />
+@* Date search section  *@
+<div class="centerText">
+	<div style="border: 1px solid #ccc; padding: 25px; margin-bottom: 10px;">
+
+		<p>Søg via dato </p>
+		<form method="post" asp-page-handler="DateSearch">
+
+			<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+				<div class="mb-10 col-10">
+					<label for="Name">Dato</label>
+					<input asp-for="Date1" class="form-control" placeholder="yyyy-mm-dd" />
+				</div>
+				<div class="mb-10 col-10">
+					<label for="Name">Mellem</label>
+					<input asp-for="Date2" class="form-control" placeholder="yyyy-mm-dd" />
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-secondary">
+				Søg
+			</button>
+		</form>
+	</div>
+</div>
+
+@* Name search section  *@
+<div class="centerText">
+	<div style="border: 1px solid #ccc; padding: 25px; margin-bottom: 10px;">
+
+		<p>Søg via navn </p>
+		<form method="post" asp-page-handler="NameSearch">
+
+			<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+				<div class="mb-10 col-10">
+					<label for="Name">Aktivitets navn</label>
+					<input asp-for="AcName" class="form-control" placeholder="Søg efter bynavn" />
+				</div>
+				<div class="mb-10 col-10">
+					<label for="Name">Bynavn</label>
+					<input asp-for="CityName" class="form-control" placeholder="Søg efter bynavn" />
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-secondary">
+				Søg
+			</button>
+		</form>
+	</div>
+</div>
+
+<br />
+@foreach (Activities item in @Model.ActivitiesListe)
+{
+
+	<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+
+		<form method="post" asp-page-handler="JoinActivitie">
+					<input type="hidden" name="acId" value="@item.ActivitieId" />
+
+			<pre>Navn : @item.NameOfActivites</pre>
+			<pre>Detaljer om aktivitet : @item.DetailsAboutActivites</pre>
+			<pre>Star Dato : @item.StartDate</pre>
+			<pre>Star Dato : @item.StartTime</pre>
+			<pre>Star Dato : @item.EndTime</pre>
+			<pre>Alder grænser : @item.AgeRestrictions</pre>
+			<pre>Max antal medlememr : @item.LimitOfMemebers</pre>
+			<pre>Antal tilmeldte : @item.LimitCounter</pre>
+			<pre>By : @item.CityName</pre>
+			<pre>Post nummer : @item.PostCode</pre>
+
+					<button type="submit" class="btn btn-secondary">
+						Tilmeld!
+					</button>
+				</form>
+	</div>
+
 }

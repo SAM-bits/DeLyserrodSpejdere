@@ -73,6 +73,44 @@ select * from ActivitiesRegister
 
 Select * from Activities 
 
+
+select Activities.NameOfActivites as NameAct,Activities.DetailsAboutActivities as Details, Activities.StartDate as StartDate, Activities.StartTime as TimeStart , Activities.EndTime as EndTime , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber , Activities.ActivitiesId as Id from Activities
+                left join ActivitiesRegister on Activities.ActivitiesId= ActivitiesRegister.ActivitiesId
+                inner join City on Activities.CityId = City.CityId
+                where  activities.StartDate between '2026-01-01' and '2027-01-01'
+                group by ActivitiesRegister.ActivitiesId,Activities.NameOfActivites,StartDate,AgeRestrictions,LimitOfMembers,CityName,PostCode,Activities.DetailsAboutActivities,Activities.StartTime,Activities.EndTime,Activities.ActivitiesId
+
+
+          select      Activities.NameOfActivites as NameAct,Activities.DetailsAboutActivities as Details, Activities.StartDate as StartDate, Activities.StartTime as TimeStart , Activities.EndTime as EndTime , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber , Activities.ActivitiesId as Id from Activities
+                left join ActivitiesRegister on Activities.ActivitiesId= ActivitiesRegister.ActivitiesId
+                inner join City on Activities.CityId = City.CityId
+                where  activities.StartDate between @dateTime and @dateTime1
+                group by ActivitiesRegister.ActivitiesId,Activities.NameOfActivites,StartDate,AgeRestrictions,LimitOfMembers,CityName,PostCode,Activities.DetailsAboutActivities,Activities.StartTime,Activities.EndTime,Activities.ActivitiesId
+
+
+
+select Activities.NameOfActivites as NameAct,Activities.DetailsAboutActivities as Details, Activities.StartDate as StartDate, Activities.StartTime as TimeStart , Activities.EndTime as EndTime , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber from ActivitiesRegister
+                inner join Activities on ActivitiesRegister.ActivitiesId=Activities.ActivitiesId
+                inner join City on Activities.CityId = City.CityId
+                where  activities.StartDate between '2026-01-01' and '2026-12-01'
+                group by ActivitiesRegister.ActivitiesId,Activities.NameOfActivites,StartDate,AgeRestrictions,LimitOfMembers,CityName,PostCode,Activities.DetailsAboutActivities,Activities.StartTime,Activities.EndTime
+
+
+
+Select Activities.*, City.CityName as CityName , City.PostCode as PostCode from Activities
+                                inner join City on Activities.CityId = City.CityId
+                                where ActivitiesId = @id
+
+
+Select Activities.*, City.CityName as CityName , City.PostCode as Postcode  from Activities
+inner join City on Activities.CityId = City.CityId
+where ActivitiesId = 5
+
+
+
+
+
+
 select  Activities.NameOfActivites as NameAct, Activities.StartDate as StartDate , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber  from ActivitiesRegister
 inner join Activities on ActivitiesRegister.ActivitiesId=Activities.ActivitiesId
 inner join City on Activities.CityId = City.CityId

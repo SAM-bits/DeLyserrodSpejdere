@@ -64,11 +64,11 @@ namespace DeLyserrodSpejdere.Repository
             DBConnector.DisconnectToDb();
         }
 
-        public List<Activities> SearchForActivities(string dateTime, string dateTime1)
+        public List<Activities> SearchForActivitiesByDate(string dateTime, string dateTime1)
         {
             DBConnector.ConnectToDB();
 
-            string sqlComm = @"select  Activities.NameOfActivites as NameAct, Activities.StartDate as StartDate , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber  from ActivitiesRegister
+            string sqlComm = @"select Activities.NameOfActivites as NameAct, Activities.StartDate as StartDate , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber , Activities.DetailsAboutActivities as Details from ActivitiesRegister
                 inner join Activities on ActivitiesRegister.ActivitiesId=Activities.ActivitiesId
                 inner join City on Activities.CityId = City.CityId
                 where  activities.StartDate between @dateTime and @dateTime1
@@ -78,7 +78,6 @@ namespace DeLyserrodSpejdere.Repository
 
             cmd.Parameters.AddWithValue(@"dateTime", dateTime);
             cmd.Parameters.AddWithValue(@"dateTime1", dateTime1);
-
 
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -96,6 +95,7 @@ namespace DeLyserrodSpejdere.Repository
                 //city
                 act.CityName = reader.GetString(5);
                 act.PostCode = reader.GetInt32(6);
+
                 list.Add(act);
             }
             reader.Close();
@@ -104,6 +104,7 @@ namespace DeLyserrodSpejdere.Repository
 
             return list;
         }
+
         public List<Activities> SearchForActivitiesByName(string name, string city)
         {
             DBConnector.ConnectToDB();
@@ -117,8 +118,7 @@ namespace DeLyserrodSpejdere.Repository
             SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
 
             cmd.Parameters.AddWithValue(@"name", "%" + name + "%");
-            cmd.Parameters.AddWithValue(@"city","%"+ city+"%");
-
+            cmd.Parameters.AddWithValue(@"city", "%" + city + "%");
 
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -149,7 +149,9 @@ namespace DeLyserrodSpejdere.Repository
         {
             DBConnector.ConnectToDB();
 
-            string sqlComm = @"Select * from Activities where ActivititeId = @id";
+            string sqlComm = @"Select Activities.* , City.CityName as CityName , City.PostCode as PostCode from Activities
+                                inner join City on Activities.CityId = City.CityId
+                                where ActivitiesId = @id";
 
             SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
 

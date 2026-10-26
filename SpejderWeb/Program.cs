@@ -10,10 +10,12 @@ namespace SpejderWeb
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddSession(); // sessions
             builder.Services.AddRazorPages();
             builder.Services.AddScoped<ICreateAccount, CreateAccount>();
             builder.Services.AddScoped<ILoginRepo, LoginRepo>();
             builder.Services.AddScoped<IAdminLoginRepo, AdminLoginRepo>();
+            builder.Services.AddScoped<IUserLoginRepo, UserLoginRepo>();
 
             var app = builder.Build();
 
@@ -28,6 +30,8 @@ namespace SpejderWeb
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 
