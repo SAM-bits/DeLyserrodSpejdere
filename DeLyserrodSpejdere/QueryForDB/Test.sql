@@ -75,6 +75,23 @@ Select * from Activities
 
 
 
+Select Activities.NameOfActivites as NameAct,Activities.DetailsAboutActivities as Details, Activities.StartDate as StartDate, Activities.StartTime as TimeStart , Activities.EndTime as EndTime , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber , Activities.ActivitiesId as Id from Activities
+                left join ActivitiesRegister on Activities.ActivitiesId= ActivitiesRegister.ActivitiesId
+                inner join City on Activities.CityId = City.CityId
+                where  activities.StartDate between @dateTime and @dateTime1
+                group by ActivitiesRegister.ActivitiesId,Activities.NameOfActivites,StartDate,AgeRestrictions,LimitOfMembers,CityName,PostCode";
+
+
+
+Select Activities.NameOfActivites as NameAct,Activities.DetailsAboutActivities as Details, Activities.StartDate as StartDate, Activities.StartTime as TimeStart , Activities.EndTime as EndTime , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber , Activities.ActivitiesId as Id from Activities
+                left join ActivitiesRegister on Activities.ActivitiesId= ActivitiesRegister.ActivitiesId
+                inner join City on Activities.CityId = City.CityId
+                where  activities.StartDate between '2026-01-01' and '2027-01-01'
+                group by ActivitiesRegister.ActivitiesId,Activities.NameOfActivites,StartDate,AgeRestrictions,LimitOfMembers,CityName,PostCode
+
+
+
+
 Select ActivitiesRegister.*, Activities.NameOfActivites as AcName , Activities.StartDate as StartDate , Activities.StartTime as TimeStart , Activities.Address as Adresse , City.CityName as CityName , city.PostCode as PostCode from ActivitiesRegister
 inner join Activities on ActivitiesRegister.ActivitiesId = Activities.ActivitiesId
 inner join City on Activities.CityId = City.CityId

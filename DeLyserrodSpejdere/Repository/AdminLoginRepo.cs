@@ -68,8 +68,8 @@ namespace DeLyserrodSpejdere.Repository
         {
             DBConnector.ConnectToDB();
 
-            string sqlComm = @"select Activities.NameOfActivites as NameAct, Activities.StartDate as StartDate , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber , Activities.DetailsAboutActivities as Details from ActivitiesRegister
-                inner join Activities on ActivitiesRegister.ActivitiesId=Activities.ActivitiesId
+            string sqlComm = @"Select Activities.NameOfActivites as NameAct, Activities.StartDate as StartDate , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber from Activities
+                left join ActivitiesRegister on Activities.ActivitiesId= ActivitiesRegister.ActivitiesId
                 inner join City on Activities.CityId = City.CityId
                 where  activities.StartDate between @dateTime and @dateTime1
                 group by ActivitiesRegister.ActivitiesId,Activities.NameOfActivites,StartDate,AgeRestrictions,LimitOfMembers,CityName,PostCode";
@@ -109,8 +109,8 @@ namespace DeLyserrodSpejdere.Repository
         {
             DBConnector.ConnectToDB();
 
-            string sqlComm = @"select  Activities.NameOfActivites as NameAct, Activities.StartDate as StartDate , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber  from ActivitiesRegister
-                inner join Activities on ActivitiesRegister.ActivitiesId=Activities.ActivitiesId
+            string sqlComm = @"Select Activities.NameOfActivites as NameAct, Activities.StartDate as StartDate , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber from Activities
+                left join ActivitiesRegister on Activities.ActivitiesId= ActivitiesRegister.ActivitiesId
                 inner join City on Activities.CityId = City.CityId
                 where City.CityName like @city or Activities.NameOfActivites like @name
                 group by ActivitiesRegister.ActivitiesId,Activities.NameOfActivites,StartDate,AgeRestrictions,LimitOfMembers,CityName,PostCode";
