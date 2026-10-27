@@ -74,6 +74,22 @@ select * from ActivitiesRegister
 Select * from Activities 
 
 
+
+Select ActivitiesRegister.*, Activities.NameOfActivites as AcName , Activities.StartDate as StartDate , Activities.StartTime as TimeStart , Activities.Address as Adresse , City.CityName as CityName , city.PostCode as PostCode from ActivitiesRegister
+inner join Activities on ActivitiesRegister.ActivitiesId = Activities.ActivitiesId
+inner join City on Activities.CityId = City.CityId
+where ActivitiesRegister.PersonId = 3
+
+
+
+
+
+
+
+
+
+
+
 select Activities.NameOfActivites as NameAct,Activities.DetailsAboutActivities as Details, Activities.StartDate as StartDate, Activities.StartTime as TimeStart , Activities.EndTime as EndTime , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber , Activities.ActivitiesId as Id from Activities
                 left join ActivitiesRegister on Activities.ActivitiesId= ActivitiesRegister.ActivitiesId
                 inner join City on Activities.CityId = City.CityId

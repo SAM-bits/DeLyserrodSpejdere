@@ -43,6 +43,44 @@ namespace DeLyserrodSpejdere.Repository
             return liste;
         }
 
+        public List<Activities> ShowJoinedActivities(int? id)
+        {
+            DBConnector.ConnectToDB();
+
+            string sqlComm = @"Select ActivitiesRegister.*, Activities.NameOfActivites as AcName , Activities.StartDate as StartDate , Activities.StartTime as TimeStart , Activities.EndTime as TimeEnd, Activities.Address as Adresse , City.CityName as CityName , city.PostCode as PostCode from ActivitiesRegister
+                                inner join Activities on ActivitiesRegister.ActivitiesId = Activities.ActivitiesId
+                                inner join City on Activities.CityId = City.CityId
+                                where ActivitiesRegister.PersonId = @id";
+
+            SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
+
+            cmd.Parameters.AddWithValue(@"id", id);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<Activities> liste = new();
+
+            while (reader.Read())
+            {
+                Activities show = new();
+
+                show.NameOfActivites = reader.GetString(3);
+                show.StartDate = DateOnly.FromDateTime(reader.GetDateTime(4));
+                show.StartTime = TimeOnly.FromTimeSpan(reader.GetTimeSpan(5));
+                show.EndTime = TimeOnly.FromTimeSpan(reader.GetTimeSpan(6));
+                show.Address = reader.GetString(7);
+                show.CityName = reader.GetString(8);
+                show.PostCode = reader.GetInt32(9);
+
+                liste.Add(show);
+            }
+            reader.Close();
+
+            DBConnector.DisconnectToDb();
+
+            return liste;
+        }
+
         public void JoinActivitiesByPersonId(int activitesId, int? personId)
         {
             DBConnector.ConnectToDB();
@@ -61,7 +99,7 @@ namespace DeLyserrodSpejdere.Repository
             DBConnector.DisconnectToDb();
         }
 
-        public void LeaveActivities(int id)
+        public void LeaveActivities(int? id)
         {
             DBConnector.ConnectToDB();
 

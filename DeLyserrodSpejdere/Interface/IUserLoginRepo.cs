@@ -6,9 +6,11 @@ namespace DeLyserrodSpejdere.Interface
     {
         void JoinActivitiesByPersonId(int activitesId, int? personId);
 
-        void LeaveActivities(int id);
+        void LeaveActivities(int? id);
 
         List<Activities> ShowActivities();
+
+        List<Activities> ShowJoinedActivities(int? id);
 
         List<Activities> SearchForActivitiesByDate(string dateTime, string dateTime1);
 

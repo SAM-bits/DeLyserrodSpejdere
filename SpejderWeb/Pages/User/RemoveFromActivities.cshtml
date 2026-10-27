@@ -1,19 +1,52 @@
 ﻿@page
+@using DeLyserrodSpejdere.Model
 @model SpejderWeb.Pages.User.RemoveFromActivitiesModel
 @{
 }
-
 <div class="btn-group-custom-center" role="group" aria-label="Aktiviteter">
-
-	<a asp-page="/User/ShowActivities" class="btn btn-secondary">
-		Mine tilmeldte aktiviteter
-	</a>
 
 	<a asp-page="/User/ShowActivities" class="btn btn-secondary">
 		Vis tilgængelig aktiviteter
 	</a>
 
 	<a asp-page="/User/RemoveFromActivities" class="btn btn-secondary">
-		Framelde fra aktivitet.
+		Se eller frameld aktivitet.
 	</a>
 </div>
+<br />
+<div class="centerText">
+
+	<form method="post" asp-page-handler="ShowAc">
+
+	<button type="submit" class="btn btn-secondary">
+		Se tilmeldte akitiviteter
+	</button>
+</form>
+
+<br />
+</div>  @* hej *@
+<br />
+@foreach (Activities item in Model.ActivitiesListe)
+{
+
+	<div class="centerText">
+			<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+
+		<pre>Navn : @item.NameOfActivites</pre>
+		<pre>Start Dato : @item.StartDate</pre>
+		<pre>Start tid : @item.StartTime</pre>
+		<pre>Slut tid : @item.EndTime</pre>
+		<pre>Adresse : @item.Address</pre>
+		<pre>Bynavn : @item.CityName</pre>
+		<pre>Postnummer : @item.PostCode</pre>
+
+		<form method="post" asp-page-handler="LeaveAc">
+
+			<button style="g" type="submit" class="btn btn-secondary">
+				Forlad aktivitet
+			</button>
+		</form>
+	</div>
+	</div>
+
+	}
