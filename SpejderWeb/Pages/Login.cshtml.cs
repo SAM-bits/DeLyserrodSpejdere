@@ -1,7 +1,9 @@
 using DeLyserrodSpejdere.Interface;
+using DeLyserrodSpejdere.Model;
 using DeLyserrodSpejdere.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Xml.Linq;
 
 namespace SpejderWeb.Pages
 {
@@ -23,7 +25,7 @@ namespace SpejderWeb.Pages
         [BindProperty]
         public string UserPassword { get; set; }
 
-        private static int LoggedId { get; set; }
+        public string FirstLastName { get; set; }
 
         public IActionResult OnPost()
         {
@@ -32,21 +34,33 @@ namespace SpejderWeb.Pages
             if (isUser == true && isSuper == true)
             {
                 HttpContext.Session.SetInt32("LoggedId", loggedId);
+
+                string name = _login.ReadPersonById(loggedId);
+                HttpContext.Session.SetString("FirstLastName", name);
+
                 Message = "Du er logget ind som en adminstrator";
                 return RedirectToPage("/Admin/AdminLogin");
             }
             if (isUser == true && isSuper == false)
             {
                 HttpContext.Session.SetInt32("LoggedId", loggedId);
+
+                string name = _login.ReadPersonById(loggedId);
+                HttpContext.Session.SetString("FirstLastName", name);
+
                 Message = "Du er logget ind som en bruger";
+
                 return RedirectToPage("/User/UserLogin");
             }
 
             return RedirectToPage("/Login");
         }
 
-        public void OnGet()
+        public IActionResult OnPostLogout()
         {
+            HttpContext.Session.Remove("LoggedId");
+
+            return RedirectToPage("/Index");
         }
     }
 }

@@ -9,9 +9,13 @@ namespace SpejderWeb
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            //session
+
             // Add services to the container.
-            builder.Services.AddSession(); // sessions
+
             builder.Services.AddRazorPages();
+            builder.Services.AddDistributedMemoryCache(); // gemmer chache i memorien.
+            builder.Services.AddSession(Config); // sessions med en timeout op 1 min.
             builder.Services.AddScoped<ICreateAccount, CreateAccount>();
             builder.Services.AddScoped<ILoginRepo, LoginRepo>();
             builder.Services.AddScoped<IAdminLoginRepo, AdminLoginRepo>();
@@ -40,6 +44,14 @@ namespace SpejderWeb
                .WithStaticAssets();
 
             app.Run();
+
+            /// methoder
+            ///
+
+            void Config(SessionOptions option)
+            {
+                option.IdleTimeout = TimeSpan.FromMinutes(1);
+            }
         }
     }
 }

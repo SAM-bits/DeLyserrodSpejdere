@@ -50,5 +50,30 @@ namespace DeLyserrodSpejdere.Repository
             DBConnector.DisconnectToDb();
             return (usercontrol, isSupervioser, loggedId);
         }
+
+        public string ReadPersonById(int? id)
+        {
+            DBConnector.ConnectToDB();
+
+            string sqlComm = @"Select CONCAT( Person.FirstName ,' ', Person.LastName) from Person where PersonId = @id";
+
+            SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
+
+            cmd.Parameters.AddWithValue(@"id", id);
+
+            string firstLastName = "";
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                firstLastName = reader.GetString(0);
+            }
+
+            reader.Close();
+            DBConnector.DisconnectToDb();
+
+            return firstLastName;
+        }
     }
 }

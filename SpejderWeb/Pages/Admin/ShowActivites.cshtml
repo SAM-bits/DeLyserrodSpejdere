@@ -2,6 +2,7 @@
 @using DeLyserrodSpejdere.Model
 @model SpejderWeb.Pages.Admin.ShowAktivitesModel
 @{
+	Layout = "_Admin";
 }
 <div class="btn-group-custom-center" role="group" aria-label="Aktiviteter">
 
@@ -28,7 +29,6 @@
 
 <br />
 
-
 @* Date search section  *@
 <div class="centerText">
 	<div style="border: 1px solid #ccc; padding: 25px; margin-bottom: 10px;">
@@ -36,32 +36,21 @@
 		<p>Søg via dato </p>
 		<form method="post" asp-page-handler="SearchDate">
 
-
 			<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
 				<div class="mb-10 col-10">
 					<label for="Name">Dato</label>
 					<input asp-for="DateSearch" class="form-control" placeholder="yyyy-mm-dd" />
-
 				</div>
 				<div class="mb-10 col-10">
 					<label for="Name">Mellem</label>
 					<input asp-for="DateSearch1" class="form-control" placeholder="yyyy-mm-dd" />
-
 				</div>
-
 			</div>
-
-
-
-
-
-
 
 			<button type="submit" class="btn btn-secondary">
 				Søg
 			</button>
 		</form>
-
 	</div>
 </div>
 
@@ -71,8 +60,6 @@
 
 		<p>Søg via navn </p>
 		<form method="post" asp-page-handler="SearchName">
-
-
 
 			<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
 				<div class="mb-10 col-10">
@@ -85,16 +72,10 @@
 				</div>
 			</div>
 
-
-
-
-
-
 			<button type="submit" class="btn btn-secondary">
 				Søg
 			</button>
 		</form>
-
 	</div>
 </div>
 
@@ -112,7 +93,5 @@
 		<pre>By : @item.CityName</pre>
 		<pre>Post nummer : @item.PostCode</pre>
 	</div>
-
-
 
 }

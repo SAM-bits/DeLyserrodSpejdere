@@ -73,6 +73,10 @@ select * from ActivitiesRegister
 
 Select * from Activities 
 
+Select CONCAT( Person.FirstName ,' ', Person.LastName) from Person where PersonId = 1
+
+Select Person.FirstName , Person.LastName from Person where PersonId = 1
+
 
 
 Select Activities.NameOfActivites as NameAct,Activities.DetailsAboutActivities as Details, Activities.StartDate as StartDate, Activities.StartTime as TimeStart , Activities.EndTime as EndTime , Activities.AgeRestrictions as AgeLimit,Activities.LimitOfMembers as Limits ,Count(ActivitiesRegister.ActivitiesId) as LimitCounter , City.CityName as City, City.PostCode as PostNumber , Activities.ActivitiesId as Id from Activities
