@@ -1,6 +1,7 @@
 ﻿using DeLyserrodSpejdere.Interface;
 using DeLyserrodSpejdere.Model;
 using Microsoft.Data.SqlClient;
+using System.Runtime.ExceptionServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace DeLyserrodSpejdere.Repository

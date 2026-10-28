@@ -25,5 +25,7 @@ namespace DeLyserrodSpejdere.Repository
         List<ActivitesRegister> ShowRegisteredInActivities(int id);
 
         void UpdateActivitie(Activities upAc, int id);
+
+        //List<Person> UpdatePerson(int? id, Person updatePerson);
     }
 }

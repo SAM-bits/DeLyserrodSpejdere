@@ -65,7 +65,7 @@ DELETE FROM SpejderLogin; DBCC CHECKIDENT ('SpejderLogin', RESEED, 0);
 DELETE FROM Activities; DBCC CHECKIDENT ('Activities', RESEED, 0);	
 DELETE FROM ActivitiesRegister; DBCC CHECKIDENT ('ActivitiesRegister', RESEED, 0);	
 
-select * from Person
+select * from Person where PersonId = 1
 select * from SpejderLogin
 select * from Activities
 select * from City
@@ -73,9 +73,65 @@ select * from ActivitiesRegister
 
 Select * from Activities 
 
+
+Select Person.* , City.CityName as CityName , City.PostCode as PostCode from Person
+left join City on Person.CityId=City.CityId
+where Person.PersonId=1
+
+
+
+update Person
+Set FirstName = 'Saif' , LastName='Atyaif' , Email ='SaifAtyaif@gmail.com' , PhoneNumber='52177690' , Age=35 , Adress = 'Majengen 12' ,
+CityId=(select CityId from City where CityName like '%Solrød Strand%' and PostCode like 2680 ),SpecialCharacter =0,
+UserName='SaifMaide'
+where Person.PersonId = 1
+
+SELECT CityId, CityName, PostCode
+FROM City
+WHERE CityName Like '%so%'
+  AND PostCode Like 2680;
+
+
+
+
+
+
+
+
+
+
+
+
 Select CONCAT( Person.FirstName ,' ', Person.LastName) from Person where PersonId = 1
 
 Select Person.FirstName , Person.LastName from Person where PersonId = 1
+
+select Person.* ,City.CityName as CityName , City.PostCode as PostCode from Person 
+inner join City on Person.CityId = city.CityId
+
+
+update person
+set Firstname = 'Saif' , LastName='Maide' , CityId=(Select CityId from City where CityName='Køge' and PostCode = 4600 )
+
+
+Select Person.* , City.CityName as CityName , City.PostCode as PostCode from Person
+                                    inner join City on Person.CityId=City.CityId 
+                                    where Person.PersonId=1
+
+
+select SpejderLogin.Username,SpejderLogin.UserPassword , person.IsSupervisor as iSSuperVisor , Person.PersonId as PersonId , ConCat(Person.FirstName , ' ' , Person.LastName) from SpejderLogin
+                                inner join Person on SpejderLogin.PersonId = Person.PersonId
+                                where SpejderLogin.UserName='SaifMadie' and SpejderLogin.UserPassword= '123456789!'
+
+
+
+
+
+
+
+
+
+
 
 
 

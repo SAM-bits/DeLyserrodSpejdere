@@ -24,6 +24,7 @@ namespace DeLyserrodSpejdere.Model
         public string _userName;
         public string _userPassword;
         public string _userPassworConfrim;
+        public string _updatePassword;
 
         public int IsSupervisor
         {
@@ -46,13 +47,15 @@ namespace DeLyserrodSpejdere.Model
             get { return _firstName; }
             set
             {
+                Console.WriteLine(value);
+
                 if (string.IsNullOrWhiteSpace(value) || value.Trim().Length < 2)
                 {
                     throw new ArgumentException("Navn skal være min. 2 bogstaver ");
                 }
                 foreach (char name in value)
                 {
-                    if (char.IsLetter(name) == false)
+                    if (char.IsLetter(name) == false && name != '-')
                     {
                         throw new ArgumentException("Navn må kun indeholde bogstaver");
                     }
@@ -228,6 +231,15 @@ namespace DeLyserrodSpejdere.Model
                 }
 
                 _userPassworConfrim = value;
+            }
+        }
+
+        public string UpdateUserPassword
+        {
+            get { return _updatePassword; }
+            set
+            {
+                _updatePassword = value;
             }
         }
 

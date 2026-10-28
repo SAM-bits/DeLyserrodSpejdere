@@ -25,18 +25,21 @@ namespace SpejderWeb.Pages
         [BindProperty]
         public string UserPassword { get; set; }
 
+        [BindProperty]
+        public Person UpdatePerson { get; set; }
+
         public string FirstLastName { get; set; }
+
+        public List<Person> PersonList { get; set; }
 
         public IActionResult OnPost()
         {
-            (bool isUser, bool isSuper, int loggedId) = _login.LoginController(UserName, UserPassword);
+            (bool isUser, bool isSuper, int loggedId, string firstLastName) = _login.LoginController(UserName, UserPassword);
 
             if (isUser == true && isSuper == true)
             {
                 HttpContext.Session.SetInt32("LoggedId", loggedId);
-
-                string name = _login.ReadPersonById(loggedId);
-                HttpContext.Session.SetString("FirstLastName", name);
+                HttpContext.Session.SetString("FirstLastName", firstLastName);
 
                 Message = "Du er logget ind som en adminstrator";
                 return RedirectToPage("/Admin/AdminLogin");
@@ -44,9 +47,7 @@ namespace SpejderWeb.Pages
             if (isUser == true && isSuper == false)
             {
                 HttpContext.Session.SetInt32("LoggedId", loggedId);
-
-                string name = _login.ReadPersonById(loggedId);
-                HttpContext.Session.SetString("FirstLastName", name);
+                HttpContext.Session.SetString("FirstLastName", firstLastName);
 
                 Message = "Du er logget ind som en bruger";
 
