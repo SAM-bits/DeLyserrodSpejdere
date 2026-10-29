@@ -18,13 +18,18 @@ namespace SpejderWeb.Pages
         public Person Person { get; set; } = new();
 
         [TempData]
-        public string Message { get; set; }
+        public string CreateOk { get; set; }
 
         public IActionResult OnPost()
         {
-            _createAccount.Create(Person);
-
-            Message = "Person er tilføjet ";
+            if (_createAccount.Create(Person) == true)
+            {
+                CreateOk = "Person er tilføjet ";
+            }
+            else
+            {
+                CreateOk = "Fejl ved oprettelse";
+            }
 
             return RedirectToPage();
         }

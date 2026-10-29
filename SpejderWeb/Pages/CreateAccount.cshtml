@@ -1,6 +1,8 @@
 ﻿@page
 @model SpejderWeb.Pages.CreateAccountModel
 @{
+
+	Layout = "AllUser";
 }
 
 <div style="text-align: center; margin-top: 50px;">
@@ -116,9 +118,11 @@
 
 		<button type="submit" class="btn btn-secondary">Opret konto</button>
 
-		@if (!string.IsNullOrEmpty(Model.Message))
+		@if (!string.IsNullOrEmpty(Model.CreateOk))
 		{
-			<p>@Model.Message</p>
+			<script>
+						alert("@Model.CreateOk");
+			</script>
 		}
 	</form>
 </div>

@@ -10,7 +10,7 @@ namespace DeLyserrodSpejdere.Repository
 {
     public class CreateAccount : ICreateAccount
     {
-        public void Create(Person account)
+        public bool Create(Person account)
         {
             DBConnector.ConnectToDB();
 
@@ -40,6 +40,18 @@ namespace DeLyserrodSpejdere.Repository
             {
                 AutoLoginCreater(id);
             }
+
+            bool ok = false;
+
+            if (id > 0)
+            {
+                ok = true;
+            }
+            else
+            {
+                ok = false;
+            }
+            return ok;
         }
 
         public void AutoLoginCreater(int id)

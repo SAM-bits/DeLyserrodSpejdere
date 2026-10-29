@@ -6,6 +6,6 @@ namespace DeLyserrodSpejdere.Interface
     {
         void AutoLoginCreater(int id);
 
-        void Create(Person account);
+        bool Create(Person account);
     }
 }
