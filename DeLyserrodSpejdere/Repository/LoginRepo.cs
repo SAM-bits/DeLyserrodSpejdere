@@ -1,9 +1,7 @@
 ﻿using DeLyserrodSpejdere.Model;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
+using System.ComponentModel.Design;
+using System.Data.SqlTypes;
 
 namespace DeLyserrodSpejdere.Repository
 {
@@ -13,9 +11,8 @@ namespace DeLyserrodSpejdere.Repository
         {
             DBConnector.ConnectToDB();
 
-            string sqlComm = @"select SpejderLogin.Username,SpejderLogin.UserPassword , person.IsSupervisor as iSSuperVisor , Person.PersonId as PersonId , ConCat(Person.FirstName , ' ' , Person.LastName) from SpejderLogin
-                                inner join Person on SpejderLogin.PersonId = Person.PersonId
-                                where SpejderLogin.UserName=@UserName and SpejderLogin.UserPassword=@UserPassword";
+            string sqlComm = @"select Person.UserName,Person.UserPassword , Person.IsSupervisor ,Person.PersonId , ConCat(Person.FirstName , ' ' , Person.LastName) as FullName from Person
+                                where Person.UserName=@Username and Person.UserPassword=@UserPassword";
 
             SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
 
@@ -83,7 +80,7 @@ namespace DeLyserrodSpejdere.Repository
         {
             DBConnector.ConnectToDB();
 
-            Console.WriteLine(updatePerson.FirstName);
+            Console.WriteLine(id);
             string sqlCommUpdate = @" update Person
                                     Set FirstName = @FirstName , LastName=@LastName , Email =@Email , PhoneNumber=@PhoneNumber , Age=@Age , Adress = @Address ,
                                     CityId=(select CityId from City where CityName like @CityName and PostCode like @PostCode ) ,SpecialCharacter =@SpecialCharacter,
@@ -148,6 +145,51 @@ namespace DeLyserrodSpejdere.Repository
             DBConnector.DisconnectToDb();
 
             return listperson;
+        }
+
+        public void PasswordChecker(int? id, string password, Person changePassword)
+        {
+            DBConnector.ConnectToDB();
+
+            string sqlCommUpdate = @" select Person.Userpassword from Person
+                                        where PersonID = @id ";
+
+            SqlCommand updateCmd = new(sqlCommUpdate, DBConnector.SqlConnection);
+
+            updateCmd.Parameters.AddWithValue(@"id", id);
+
+            string idientity = (string)updateCmd.ExecuteScalar();
+
+            Console.WriteLine($"SQL: [{idientity}]");
+            Console.WriteLine($"HTML: [{password}]");
+            Console.WriteLine($"ID: {id}");
+
+            if (idientity == password)
+            {
+                Console.WriteLine($" 1 pass fra html {changePassword.UserPassword}");
+                Console.WriteLine($" 2 pass fra html {changePassword.UserPasswordConfirm}");
+
+                string sqlCommPass = @" update Person
+                                    Set UserPassword =@UserPassword , UserPasswordConfirm = @UserPasswordConfirm
+                                    where Person.PersonId = @id
+                                    ";
+
+                SqlCommand passCmd = new(sqlCommPass, DBConnector.SqlConnection);
+
+                passCmd.Parameters.AddWithValue(@"id", id);
+                passCmd.Parameters.AddWithValue(@"UserPassword", changePassword.UserPassword);
+                passCmd.Parameters.AddWithValue(@"UserPasswordConfirm", changePassword.UserPasswordConfirm);
+                Console.WriteLine($" 1 pass fra html {changePassword.UserPassword}");
+                Console.WriteLine($" 2 pass fra html {changePassword.UserPasswordConfirm}");
+                passCmd.ExecuteNonQuery();
+            }
+            else
+            {
+                DBConnector.DisconnectToDb();
+                throw new ArgumentException("Password dosent match ");
+            }
+
+            DBConnector.DisconnectToDb();
         }
     }
 }

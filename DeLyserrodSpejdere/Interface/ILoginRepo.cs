@@ -11,5 +11,7 @@ namespace DeLyserrodSpejdere.Repository
         void UpdatePersonById(Person updatePerson, int? id);
 
         List<Person> ShowPerseonDetailsById(int? id);
+
+        void PasswordChecker(int? id, string password, Person passwordChanger);
     }
 }

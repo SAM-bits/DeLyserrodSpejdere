@@ -6,7 +6,7 @@ namespace DeLyserrodSpejdere.Interface
     {
         void JoinActivitiesByPersonId(int activitesId, int? personId);
 
-        void LeaveActivities(int? id);
+        void LeaveActivities(int? personId, int acId);
 
         List<Activities> ShowActivities();
 

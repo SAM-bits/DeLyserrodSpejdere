@@ -25,13 +25,6 @@ namespace SpejderWeb.Pages
         [BindProperty]
         public string UserPassword { get; set; }
 
-        [BindProperty]
-        public Person UpdatePerson { get; set; }
-
-        public string FirstLastName { get; set; }
-
-        public List<Person> PersonList { get; set; }
-
         public IActionResult OnPost()
         {
             (bool isUser, bool isSuper, int loggedId, string firstLastName) = _login.LoginController(UserName, UserPassword);

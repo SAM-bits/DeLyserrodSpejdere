@@ -10,44 +10,64 @@
 		Vis tilgængelig aktiviteter
 	</a>
 
-	<a asp-page="/User/RemoveFromActivities" class="btn btn-secondary">
+	<a asp-page="/User/RemoveFromActivities"
+	   class="btn btn-secondary">
 		Se eller frameld aktivitet.
 	</a>
 </div>
 <br />
-<div class="centerText">
+
+@* <div class="centerText">
 
 	<form method="post" asp-page-handler="ShowAc">
 
-	<button type="submit" class="btn btn-secondary">
-		Se tilmeldte akitiviteter
-	</button>
-</form>
+		<button type="submit" class="btn btn-secondary">
+			Se tilmeldte akitiviteter
+		</button>
+	</form>
 
+	<br />
+</div>  *@
 <br />
-</div>  @* hej *@
-<br />
-@foreach (Activities item in Model.ActivitiesListe)
+
+@if (Model.ActivitiesListe.Count == 0)
 {
 
 	<div class="centerText">
+		<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+
+			<p> Der er ingen tilmeldte aktiviteter </p>
+		</div>
+	</div>
+
+}
+else
+{
+
+	@foreach (Activities item in Model.ActivitiesListe)
+	{
+
+		<div class="centerText">
 			<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
 
-		<pre>Navn : @item.NameOfActivites</pre>
-		<pre>Start Dato : @item.StartDate</pre>
-		<pre>Start tid : @item.StartTime</pre>
-		<pre>Slut tid : @item.EndTime</pre>
-		<pre>Adresse : @item.Address</pre>
-		<pre>Bynavn : @item.CityName</pre>
-		<pre>Postnummer : @item.PostCode</pre>
+				<pre>Navn : @item.NameOfActivites</pre>
+				<pre>Start Dato : @item.StartDate</pre>
+				<pre>Start tid : @item.StartTime</pre>
+				<pre>Slut tid : @item.EndTime</pre>
+				<pre>Adresse : @item.Address</pre>
+				<pre>Bynavn : @item.CityName</pre>
+				<pre>Postnummer : @item.PostCode</pre>
 
-		<form method="post" asp-page-handler="LeaveAc">
+				<form method="post" asp-page-handler="LeaveAc">
+					<input type="hidden" name="acId" value="@item.ActivitieId" />
 
-			<button style="g" type="submit" class="btn btn-secondary">
-				Forlad aktivitet
-			</button>
-		</form>
-	</div>
-	</div>
+					<button type="submit" class="btn btn-secondary">
+						Forlad aktivitet
+					</button>
+				</form>
+			</div>
+		</div>
 
 	}
+
+}

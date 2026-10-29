@@ -1,0 +1,130 @@
+﻿@page
+@using DeLyserrodSpejdere.Model
+@model SpejderWeb.Pages.User.UpdateAccountModel
+@{
+	Layout = "_User";
+}
+
+<div class="btn-group-custom-center" role="group" aria-label="Aktiviteter">
+
+	<a asp-page="/User/ShowActivities" class="btn btn-secondary">
+		Vis tilgængelig aktiviteter
+	</a>
+
+	<a asp-page="/User/RemoveFromActivities" class="btn btn-secondary">
+		Se eller frameld aktivitet.
+	</a>
+</div>
+
+<br />
+
+@foreach (Person person in @Model.PersonList)
+{
+	<div class="btn-group-custom-center" role="group" aria-label="Aktiviteter">
+		<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+
+			<form method="post" asp-page-handler="UpdatePerson">
+
+				<div class="mb-3 col-10">
+					<label for="Name">Fornavn</label>
+					<input name="UpdatedPerson.FirstName" class="form-control" value="@person.FirstName" />
+				</div>
+
+				<div class="mb-3 col-10">
+					<label for="Name">Efternavn</label>
+					<input name="UpdatedPerson.LastName" class="form-control" value="@person.LastName" />
+				</div>
+
+				<div class="mb-3 col-10">
+					<label for="Name">Email</label>
+					<input name="UpdatedPerson.Email" class="form-control" value="@person.Email" />
+				</div>
+
+				<div class="mb-3 col-10">
+					<label for="Name">Telefon nummber</label>
+					<input name="UpdatedPerson.PhoneNumber" class="form-control" value="@person.PhoneNumber" />
+				</div>
+
+				<div class="mb-3 col-10">
+					<label for="Name">Age</label>
+					<input name="UpdatedPerson.Age" class="form-control" value="@person.Age" />
+				</div>
+
+				<div class="mb-3 col-10">
+					<label for="Name">Adresse</label>
+					<input name="UpdatedPerson.Adress" class="form-control" value="@person.Adress" />
+				</div>
+
+				<div class="mb-3 col-10">
+					<label for="Name">By</label>
+					<input name="UpdatedPerson.CityName" class="form-control" value="@person.CityName" />
+				</div>
+
+				<div class="mb-3 col-10">
+					<label for="Name">Postnummer</label>
+					<input name="UpdatedPerson.PostCode" class="form-control" value="@person.PostCode" />
+				</div>
+
+				<div class="mb-3 col-10">
+					<label for="Name">Spejder tegn</label>
+					<input name="UpdatedPerson.SpeacialCharacters" class="form-control" value="@person.SpeacialCharacters" />
+
+					<div>
+						<label>spejder tegn. </label><br />
+
+						<select asp-for="UpdatedPerson.SpeacialCharacters">
+							<option value="">-- Vælg et spejdertegn --</option>
+							<option value="IngenTegn">Ingen tegn</option>
+							<option value="Lejrmaerke">Lejrmærke</option>
+							<option value="Balmaerke">Bålmærke</option>
+							<option value="Orienteringsmaerke">Orienteringsmærke</option>
+							<option value="Overnatningsmaerke">Overnatningsmærke</option>
+							<option value="Naturmaerke">Naturmærke</option>
+							<option value="Forstehjaelpsmaerke">Førstehjælpsmærke</option>
+							<option value="Knobmaerke">Knobmærke</option>
+							<option value="Madlavningsmaerke">Madlavningsmærke</option>
+							<option value="Vandremaerke">Vandremærke</option>
+							<option value="Pionermaerke">Pionermærke</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="mb-3 col-10">
+					<label for="Name">Bruger navn</label>
+					<input name="UpdatedPerson.UserName" class="form-control" value="@person.UserName" />
+				</div>
+
+				<button type="submit" class="btn btn-secondary">
+					Updater
+				</button>
+			</form>
+
+			<div class="btn-group-custom-center" role="group" aria-label="Aktiviteter">
+				<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+
+					<form method="post" asp-page-handler="PasswordChanger">
+
+						<div class="mb-3 col-10">
+							<label for="Name">Nuværende Kode</label>
+							<input name="PasswordChanger" class="form-control" />
+						</div>
+
+						<div class="mb-3 col-10">
+							<label for="Name">Nykode</label>
+							<input name="UpdatedPerson.UserPassword" class="form-control" />
+						</div>
+						<div class="mb-3 col-10">
+							<label for="Name">Gentag kode</label>
+							<input name="UpdatedPerson.UserPasswordConfirm" class="form-control" />
+						</div>
+
+						<button type="submit" class="btn btn-secondary">
+							Updater kode
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+}

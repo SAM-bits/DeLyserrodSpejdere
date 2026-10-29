@@ -64,6 +64,7 @@ namespace DeLyserrodSpejdere.Repository
             {
                 Activities show = new();
 
+                show.ActivitieId = reader.GetInt32(1);
                 show.NameOfActivites = reader.GetString(3);
                 show.StartDate = DateOnly.FromDateTime(reader.GetDateTime(4));
                 show.StartTime = TimeOnly.FromTimeSpan(reader.GetTimeSpan(5));
@@ -99,18 +100,19 @@ namespace DeLyserrodSpejdere.Repository
             DBConnector.DisconnectToDb();
         }
 
-        public void LeaveActivities(int? id)
+        public void LeaveActivities(int? personId, int acId)
         {
             DBConnector.ConnectToDB();
 
-            string sqlComm = @"delete from ActivitiesRegister where PersonId = @id";
+            string sqlComm = @"delete from ActivitiesRegister where ActivitiesId = @acId and PersonId=@id";
 
             SqlCommand cmd = new(sqlComm, DBConnector.SqlConnection);
-            cmd.Parameters.AddWithValue(@"id", id);
+            cmd.Parameters.AddWithValue(@"id", personId);
+            cmd.Parameters.AddWithValue(@"acId", acId);
 
             if (cmd.ExecuteNonQuery() > 0)
             {
-                Console.WriteLine($"Du er frameldt fra aktiviteten som har id : ({id})");
+                Console.WriteLine($"Du er frameldt fra aktiviteten som har id : ({personId})");
             }
             DBConnector.DisconnectToDb();
         }

@@ -17,6 +17,12 @@ namespace SpejderWeb.Pages.Admin
         [BindProperty]
         public Person UpdatedPerson { get; set; } = new();
 
+        [BindProperty]
+        public string PasswordChecker { get; set; }
+
+        [BindProperty]
+        public string NewPassword { get; set; }
+
         public List<Person> PersonList { get; set; } = new();
 
         public void OnPost()
@@ -31,6 +37,12 @@ namespace SpejderWeb.Pages.Admin
             Console.WriteLine(UpdatedPerson.FirstName);
             int? personId = HttpContext.Session.GetInt32("LoggedId");
             _login.UpdatePersonById(UpdatedPerson, personId);
+        }
+
+        public void OnPostPasswordUpdater()
+        {
+            int? personId = HttpContext.Session.GetInt32("LoggedId");
+            _login.PasswordChecker(personId, PasswordChecker, UpdatedPerson);
         }
     }
 }

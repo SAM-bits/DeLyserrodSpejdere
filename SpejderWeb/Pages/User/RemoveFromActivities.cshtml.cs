@@ -16,7 +16,7 @@ namespace SpejderWeb.Pages.User
 
         public List<Activities> ActivitiesListe { get; set; } = new();
 
-        public void OnPostShowAc()
+        public void OnGet()
         {
             int? PersonId = HttpContext.Session.GetInt32("LoggedId");
 
@@ -27,13 +27,15 @@ namespace SpejderWeb.Pages.User
             }
         }
 
-        public void OnPostLeaveAc()
+        public IActionResult OnPostLeaveAc(int acId)
         {
             int? PersonId = HttpContext.Session.GetInt32("LoggedId");
             if (PersonId > 0 && PersonId != null)
             {
-                _user.LeaveActivities(PersonId);
+                _user.LeaveActivities(PersonId, acId);
             }
+
+            return RedirectToPage();
         }
     }
 }
