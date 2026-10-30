@@ -16,7 +16,7 @@ namespace DeLyserrodSpejdere.Repository
 
             string sqlComm = @"Insert Into Person (IsSupervisor,FirstName,LastName,Email,PhoneNumber,Age,Adress,CityId,SpecialCharacter,UserName,UserPassword,UserPasswordConfirm)
                                 Output inserted.PersonId
-                                Values (@IsSupervisor,@FirstName,@LastName,@Email,@PhoneNumber,@Age,@Adress,(Select CityId from City Where CityName=@CityName and PostCode=@PostCode),
+                                Values (@IsSupervisor,@FirstName,@LastName,@Email,@PhoneNumber,@Age,@Adress,(Select CityId from City Where CityName Like @CityName and PostCode like @PostCode),
                                   @SpecialCharacter,@UserName,@UserPassword,@UserPasswordConfirm)";
 
             SqlCommand cmd = new SqlCommand(sqlComm, DBConnector.SqlConnection);
@@ -28,7 +28,7 @@ namespace DeLyserrodSpejdere.Repository
             cmd.Parameters.AddWithValue(@"PhoneNumber", account.PhoneNumber);
             cmd.Parameters.AddWithValue(@"Age", account.Age);
             cmd.Parameters.AddWithValue(@"Adress", account.Adress);
-            cmd.Parameters.AddWithValue(@"CityName", account.CityName);
+            cmd.Parameters.AddWithValue(@"CityName","%"+ account.CityName +"%");
             cmd.Parameters.AddWithValue(@"PostCode", account.PostCode);
             cmd.Parameters.AddWithValue(@"SpecialCharacter", account.SpeacialCharacters);
             cmd.Parameters.AddWithValue(@"UserName", account.UserName);

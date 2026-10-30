@@ -70,6 +70,11 @@ select * from Activities
 select * from City
 select * from ActivitiesRegister 
 
+update person
+set SpecialCharacter = 1
+where PersonId= 1
+
+
 Select * from Activities 
 
 
